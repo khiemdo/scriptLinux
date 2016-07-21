@@ -121,6 +121,11 @@ cd $VERSION_NGINX
 make
 make install
 
+#install startup script
+cp ./nginx.service /lib/systemd/system
+systemctl enable nginx.service
+systemctl start nginx.service
+
 rm -f $VERSION_GEOIP.tar.gz
 rm -f $VERSION_PCRE.tar.gz
 rm -f $VERSION_ZLIB.tar.gz
