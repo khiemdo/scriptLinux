@@ -1,0 +1,20 @@
+2016-07-21 18:19:15,119 - vsftpdInstall - INFO - Start installing vsftpd
+2016-07-21 18:19:15,121 - vsftpdInstall - INFO - End installing vsftpd
+2016-07-21 18:19:15,121 - vsftpdInstall - INFO - Editting vsftpd config
+2016-07-21 18:19:15,124 - vsftpdInstall - INFO - Found anonymous_enable at line 25: "anonymous_enable=NO"
+2016-07-21 18:19:15,125 - vsftpdInstall - INFO - Found local_enable=YES at line 28: "local_enable=YES"
+2016-07-21 18:19:15,127 - vsftpdInstall - INFO - Found write_enable=YES at line 31: "write_enable=YES"
+2016-07-21 18:19:15,131 - vsftpdInstall - INFO - Found force_dot_files at line 156: "force_dot_files=YES"
+2016-07-21 18:20:33,582 - vsftpdInstall - INFO - Start installing vsftpd
+2016-07-21 18:20:33,582 - vsftpdInstall - INFO - End installing vsftpd
+2016-07-21 18:20:33,584 - vsftpdInstall - INFO - Editting vsftpd config
+2016-07-21 18:20:33,586 - vsftpdInstall - INFO - Found anonymous_enable at line 25: "anonymous_enable=NO"
+2016-07-21 18:20:33,588 - vsftpdInstall - INFO - Found local_enable=YES at line 28: "local_enable=YES"
+2016-07-21 18:20:33,588 - vsftpdInstall - INFO - Found write_enable=YES at line 31: "write_enable=YES"
+2016-07-21 18:20:33,592 - vsftpdInstall - INFO - Found force_dot_files at line 156: "force_dot_files=YES"
+2016-07-21 18:46:52,441 - vsftpdInstall - INFO - Start editting vsftpd config
+2016-07-21 18:47:04,490 - vsftpdInstall - INFO - Found anonymous_enable at line 25: "anonymous_enable=NO"
+2016-07-21 18:47:04,492 - vsftpdInstall - INFO - Found local_enable=YES at line 28: "local_enable=YES"
+2016-07-21 18:47:04,493 - vsftpdInstall - INFO - Found write_enable=YES at line 31: "write_enable=YES"
+2016-07-21 18:47:04,500 - vsftpdInstall - INFO - Found force_dot_files at line 156: "force_dot_files=YES"
+2016-07-21 18:47:14,236 - vsftpdInstall - INFO - End editting vsftpd config
