@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>b0d8fc5b-4315-4204-938f-6560b0905d10</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>vsftpd\vsftpdInstall.py</StartupFile>
+    <StartupFile>accessPointSetup\accessPointSetup.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="accessPointSetup\accessPointSetup.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BashUtility\BashHelper.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BashUtility\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="scriptLinux.py" />
     <Compile Include="usbInterface\usbInterface.py">
       <SubType>Code</SubType>
@@ -31,12 +40,52 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="accessPointSetup\" />
+    <Folder Include="BashUtility\" />
     <Folder Include="nginxFromSource\" />
+    <Folder Include="piSetup\" />
+    <Folder Include="piSetup\nginx\" />
+    <Folder Include="piSetup\nginx\conf.d\" />
+    <Folder Include="piSetup\nginx\sites-available\" />
+    <Folder Include="piSetup\nginx\sites-enabled\" />
+    <Folder Include="piSetup\nginx\snippets\" />
+    <Folder Include="piSetup\nginx\ssl\" />
     <Folder Include="usbInterface\" />
     <Folder Include="vsftpd\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="accessPointSetup\accessPointSetup.sh">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="nginxFromSource\default" />
+    <Content Include="nginxFromSource\nginx.conf" />
+    <Content Include="nginxFromSource\nginx.service">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="nginxFromSource\nginxFromSource.sh" />
+    <Content Include="piSetup\10-network-device.rules" />
+    <Content Include="piSetup\interfaces" />
+    <Content Include="piSetup\nginx\fastcgi.conf" />
+    <Content Include="piSetup\nginx\fastcgi_params" />
+    <Content Include="piSetup\nginx\koi-utf" />
+    <Content Include="piSetup\nginx\koi-win" />
+    <Content Include="piSetup\nginx\mime.types" />
+    <Content Include="piSetup\nginx\nginx.conf" />
+    <Content Include="piSetup\nginx\proxy_params" />
+    <Content Include="piSetup\nginx\scgi_params" />
+    <Content Include="piSetup\nginx\sites-available\default" />
+    <Content Include="piSetup\nginx\sites-available\default.bk" />
+    <Content Include="piSetup\nginx\sites-available\laverna" />
+    <Content Include="piSetup\nginx\sites-available\owncloud" />
+    <Content Include="piSetup\nginx\sites-available\plex" />
+    <Content Include="piSetup\nginx\sites-enabled\laverna" />
+    <Content Include="piSetup\nginx\snippets\fastcgi-php.conf" />
+    <Content Include="piSetup\nginx\snippets\snakeoil.conf" />
+    <Content Include="piSetup\nginx\ssl\owncloud.crt" />
+    <Content Include="piSetup\nginx\ssl\owncloud.key" />
+    <Content Include="piSetup\nginx\uwsgi_params" />
+    <Content Include="piSetup\nginx\win-utf" />
+    <Content Include="usbInterface\interfaces" />
     <Content Include="vsftpd\vsftpd.conf" />
   </ItemGroup>
   <PropertyGroup>

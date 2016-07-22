@@ -1,0 +1,38 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+#	server_name fnick2812.pi.com;
+
+
+	access_log /var/log/nginx/lavernaAccess.log debug;
+	error_log /var/log/nginx/lavernaError.log debug;
+
+	location /laverna/ {
+	        return       301 	https://172.10.10.1/laverna;
+	}
+}
+server{
+	listen 443 ssl;
+	ssl_certificate /etc/nginx/ssl/owncloud.crt;
+	ssl_certificate_key /etc/nginx/ssl/owncloud.key;        
+
+	root /var/www/;
+
+	server_name fnick2812.pi.com;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.php;
+
+        server_name fnick2812.pi.com;
+
+        access_log /var/log/nginx/lavernaAccess.log debug;
+        error_log /var/log/nginx/lavernaError.log debug;
+
+        location /laverna/ {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+}
+

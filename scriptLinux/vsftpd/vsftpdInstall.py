@@ -1,28 +1,19 @@
 #!/usr/bin/python
+from os import path
+import sys
+SCRIPT_DIR = path.dirname(__file__)
+sys.path.append(path.join(SCRIPT_DIR,'..'))
+from BashUtility import BashHelper
+
 import logging
 from shutil import move
-from os import path, remove
+from os import remove
 import subprocess
 
 CONFIG_FILE_NAME = "vsftpd.conf"
 CONFIG_FILE_DIR = "/etc/"
 
 vsftpdConfigPath = ""
-def SetupVsftpdLogger(fileName,fileDirName):
-    logger = logging.getLogger(fileName)
-    logger.setLevel(logging.DEBUG)
-
-    logConsoleHd = logging.StreamHandler()
-    logConsoleHd.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    logConsoleHd.setFormatter(formatter)
-    logger.addHandler(logConsoleHd)
-
-    logFileHd = logging.FileHandler(fileDirName)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    logFileHd.setFormatter(formatter)
-    logger.addHandler(logFileHd)
-    return logger
 
 def InstallVsfptd(logger):
     #installation here
@@ -43,6 +34,7 @@ def EditVsftpdConfig(logger,filePath):
     needleStr = ""
 
     force_dot_files_Flag = 0
+
     for line in originFhd:
         lineNum += 1
         #Change anonymous_enable=YES to anonymous_enable=NO,
@@ -87,9 +79,8 @@ def EditVsftpdConfig(logger,filePath):
 
 
 if __name__ == "__main__":
-    logger = SetupVsftpdLogger('vsftpdInstall',"./vsftpdInstall.log")
+    logger = SetupLogger('vsftpdInstall',"./vsftpdInstall.log")
 
-#    script_dir = path.dirname(__file__)
 #    filePath = path.join(script_dir, CONFIG_FILE_NAME) 
 
     filePath = CONFIG_FILE_DIR + CONFIG_FILE_NAME
