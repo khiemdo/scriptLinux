@@ -26,11 +26,11 @@ def InstallVsfptd(logger):
     logger.info("Backup vsftpd.conf")
     pc = subprocess.check_call("cp /etc/vsftpd.conf ./vsftpd.conf.bk".split());
     logger.info("End installing vsftpd")
+
 def EditVsftpdConfig(logger,filePath):
     logger.info("Start editting vsftpd config")
-    script_dir = path.dirname(__file__)
     #copy config for backup
-    copy(filePath,path.join(script_dir, path.basename(filePath)+'.bk'))
+    copy(filePath,path.join(SCRIPT_DIR, path.basename(filePath)+'.bk'))
     originFhd = open(filePath,'r+')
     #tempFile, tempAbsPath = mkstemp()
 

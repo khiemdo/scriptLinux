@@ -23,9 +23,15 @@ def InstallWifiAccessPointPkgs(logger):
 
 def EditDhcpConfig(logger, filePath):
     logger.info("Start installing dhcp config")
+    BashHelper.BackupFileBfMod(filePath,logger)
+
     originFhd = open(filePath,'r+')
     tempAbsPath = path.join(script_dir, "tmpVsftpd") 
-    ret = remove(tempAbsPath)  
+    try:
+        ret = remove(tempAbsPath)  
+    except OSError as err:
+        logger.info("No existed tempFile in the current folder")
+        pass  
     tempFhd = open(tempAbsPath,'w+')
     lineNum = 0
     needleStr = ""
@@ -45,31 +51,31 @@ def EditDhcpConfig(logger, filePath):
         lineNum += 1
         #Change domain-name,domain-name-servers
         needleStr = 'option domain-name "example.org";'
-        replacedStr='#option domain-name "example.org";\n'#todo
+        replacedStr='#option domain-name "example.org";\n'
         ret = line.find(needleStr)
         if(ret == 0):
             logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)#todo
+            line = line.replace(line,replacedStr)
         elif(ret != 1 or line[0] != '#'):
             logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)#todo
+            line = line.replace(line,replacedStr)
 
         needleStr = 'option domain-name-servers ns1.example.org, ns2.example.org;'
         replacedStr='#option domain-name-servers ns1.example.org, ns2.example.org;'
         ret = line.find(needleStr)
         if(ret == 0):
             logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)#todo
+            line = line.replace(line,replacedStr)
         elif(ret != 1 or line[0] != '#'):
             logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)#todo
+            line = line.replace(line,replacedStr)
     
         needleStr = 'authoritative;\n'
         replacedStr='authoritative;\n'
         ret = line.find(needleStr)
         if(ret == 1 and line[0]=='#'):
             logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)#todo 
+            line = line.replace(line,replacedStr)
         tempFhd.write(line)      
 
         needleStr = subnet_string_dhcp_config
@@ -87,10 +93,15 @@ def EditDhcpConfig(logger, filePath):
     logger.info("End installing dhcp config")
 def EditIscDhcpServerConfig(logger, filePath):
     logger.info("Start installing IscDhcpServer config")
-    logger.info("Start installing dhcp config")
+    BashHelper.BackupFileBfMod(filePath)
+
     originFhd = open(filePath,'r+')
     tempAbsPath = path.join(script_dir, "tmpVsftpd") 
-    ret = remove(tempAbsPath)  
+    try:
+        ret = remove(tempAbsPath)  
+    except OSError as err:
+        logger.info("No existed tempFile in the current folder")
+        pass 
     tempFhd = open(tempAbsPath,'w+')
     lineNum = 0
     needleStr = ""
@@ -102,7 +113,7 @@ def EditIscDhcpServerConfig(logger, filePath):
         needleStr = 'INTERFACES='
         replacedStr = 'INTERFACES="wlan0"\n'
         ret = line.find(needleStr)
-        if(ret == 0):
+        if(ret == 0 or ret == 1):
             logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
             line = line.replace(line,replacedStr)#todo  
         tempFhd.write(line)      
@@ -148,7 +159,11 @@ rsn_pairwise=CCMP
 """
 
     tempAbsPath = path.join(script_dir, "tmpVsftpd") 
-    ret = remove(tempAbsPath)  
+    try:
+        ret = remove(tempAbsPath)  
+    except OSError as err:
+        logger.info("No existed tempFile in the current folder")
+        pass 
     tempFhd = open(tempAbsPath,'w+')
     tempFhd.write(hostapd_configuration_string) 
     ret = remove(filePath)  
@@ -158,7 +173,11 @@ def EditHostApdDefault(logger, filePath):
     logger.info("Start installing HostApd Defautl")
     originFhd = open(filePath,'r+')
     tempAbsPath = path.join(script_dir, "tmpVsftpd") 
-    ret = remove(tempAbsPath)  
+    try:
+        ret = remove(tempAbsPath)  
+    except OSError as err:
+        logger.info("No existed tempFile in the current folder")
+        pass
     tempFhd = open(tempAbsPath,'w+')
 
     
@@ -183,8 +202,6 @@ def EditInterfacesConfig(logger, filePath):
     logger.info("Start installing interfaces config")
 
     logger.info("End installing interfaces config")
-
-
 def EditSysctlConfig(logger, filePath):
     logger.info("Start installing Sysctl config")
 
@@ -196,8 +213,8 @@ if __name__ == "__main__":
 #    filePath = path.join(SCRIPT_DIR, CONFIG_FILE_NAME) 
     filePath = CONFIG_FILE_DIR + CONFIG_FILE_NAME
     InstallWifiAccessPointPkgs(logger)
-    EditDhcpConfig(logger,DHCP_CONFIG_FILE_PATH)
-    EditIscDhcpServerConfig(logger,ISC_DHCP_SERVER_CONFIG_FILE_PATH)
-    EditHostApdConfig(logger,HOSTAPD_CONFIG_FILE_PATH)
-    EditHostApdDefault(logger,HOSTAPD_DEFAULT_FILE_PATH)
-    EditInterfacesConfig(logger,INTERFACES_CONFIG_FILE_PATH)
+#    EditDhcpConfig(logger,DHCP_CONFIG_FILE_PATH)
+#    EditIscDhcpServerConfig(logger,ISC_DHCP_SERVER_CONFIG_FILE_PATH)
+#    EditHostApdConfig(logger,HOSTAPD_CONFIG_FILE_PATH)
+#    EditHostApdDefault(logger,HOSTAPD_DEFAULT_FILE_PATH)
+#    EditInterfacesConfig(logger,INTERFACES_CONFIG_FILE_PATH)

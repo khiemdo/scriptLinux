@@ -22,3 +22,6 @@ def CheckOutputOfCallingBash(process, logger):
         if(line.find("error")!=-1):
             logger.error("Error when installing vsftpd")
             sys.exit()
+
+def BackupFileBfMod(filePath,logger):
+    copy(filePath,path.join(script_dir, path.basename(filePath)+'.bk'))
