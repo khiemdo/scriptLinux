@@ -15,3 +15,10 @@ def SetupLogger(fileName,fileDirName):
     logFileHd.setFormatter(formatter)
     logger.addHandler(logFileHd)
     return logger
+
+def CheckOutputOfCallingBash(process, logger):
+    for line in process.stdout:
+        logger.info(line.rstrip())
+        if(line.find("error")!=-1):
+            logger.error("Error when installing vsftpd")
+            sys.exit()

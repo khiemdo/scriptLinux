@@ -6,7 +6,7 @@ sys.path.append(path.join(SCRIPT_DIR,'..'))
 from BashUtility import BashHelper
 
 import logging
-from shutil import move
+from shutil import move, copy
 from os import remove
 import subprocess
 
@@ -18,23 +18,27 @@ vsftpdConfigPath = ""
 def InstallVsfptd(logger):
     #installation here
     logger.info("Start installing vsftpd")
+    
     pc = subprocess.Popen("apt-get -y install vsftpd".split(),stdout = subprocess.PIPE)#todo
-    for line in pc.stdout:
-        logger.info(line.rstrip())
-        if(line.find("error")!=-1):
-            logger.error("Error when installing vsftpd")
-            sys.exit()
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
+    #backup vsftpd.conf
+    logger.info("Backup vsftpd.conf")
+    pc = subprocess.check_call("cp /etc/vsftpd.conf ./vsftpd.conf.bk".split());
     logger.info("End installing vsftpd")
 def EditVsftpdConfig(logger,filePath):
     logger.info("Start editting vsftpd config")
+    script_dir = path.dirname(__file__)
+    #copy config for backup
+    copy(filePath,path.join(script_dir, path.basename(filePath)+'.bk'))
     originFhd = open(filePath,'r+')
     #tempFile, tempAbsPath = mkstemp()
-    script_dir = path.dirname(__file__)
+
     tempAbsPath = path.join(script_dir, "tmpVsftpd") 
     tempFhd = open(tempAbsPath,'w+')
     lineNum = 0
     needleStr = ""
-    replacedStr = ""
+    replacedStr = ""#todo
 
     force_dot_files_Flag = 0
 
@@ -84,10 +88,9 @@ def EditVsftpdConfig(logger,filePath):
     logger.info("End editting vsftpd config")
 
 
-
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('vsftpdInstall',"./vsftpdInstall.log")
     filePath = path.join(SCRIPT_DIR, CONFIG_FILE_NAME) 
-#    filePath = CONFIG_FILE_DIR + CONFIG_FILE_NAME
- #   InstallVsfptd(logger)
+#   filePath = CONFIG_FILE_DIR + CONFIG_FILE_NAME
+#   InstallVsfptd(logger)
     EditVsftpdConfig(logger,filePath)

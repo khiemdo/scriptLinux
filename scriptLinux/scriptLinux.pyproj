@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>b0d8fc5b-4315-4204-938f-6560b0905d10</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>vsftpd\vsftpdInstall.py</StartupFile>
+    <StartupFile>usbInterface\usbInterface.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

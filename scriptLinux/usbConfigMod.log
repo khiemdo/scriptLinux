@@ -1,0 +1,67 @@
+2016-07-23 18:06:57,269 - usbConfigMod - INFO - Start editting interface config
+2016-07-23 18:06:57,269 - usbConfigMod - INFO - Found allow-hotplug usb0 at line 16: "allow-hotplug usb0"-->""
+2016-07-23 18:06:57,285 - usbConfigMod - INFO - Found auto usb0 at line 17: "auto usb0"-->""
+2016-07-23 18:06:57,285 - usbConfigMod - INFO - Found iface usb0 at line 18: "iface usb0 inet static"-->""
+2016-07-23 18:06:57,285 - usbConfigMod - INFO - Remove single newline
+2016-07-23 18:06:57,285 - usbConfigMod - INFO - Found address at line 19: "address 192.168.42.42"-->""
+2016-07-23 18:06:57,285 - usbConfigMod - INFO - Found netmask at line 20: "netmask 255.255.255.0"-->""
+2016-07-23 18:06:57,285 - usbConfigMod - INFO - Found network at line 21: "network 192.168.42.0"-->""
+2016-07-23 18:06:57,285 - usbConfigMod - INFO - Found broadcast at line 22: "broadcast 192.168.42.255"-->""
+2016-07-23 18:06:57,285 - usbConfigMod - INFO - End editting interface config
+2016-07-23 18:08:28,184 - usbConfigMod - INFO - Start editting interface config
+2016-07-23 18:08:28,184 - usbConfigMod - INFO - Found allow-hotplug usb0 at line 18: "allow-hotplug usb0"-->""
+2016-07-23 18:08:28,184 - usbConfigMod - INFO - Found auto usb0 at line 19: "auto usb0"-->""
+2016-07-23 18:08:28,200 - usbConfigMod - INFO - Found iface usb0 at line 20: "iface usb0 inet static"-->""
+2016-07-23 18:08:28,200 - usbConfigMod - INFO - Remove single newline
+2016-07-23 18:08:28,200 - usbConfigMod - INFO - Found address at line 21: "    address 192.168.42.42"-->""
+2016-07-23 18:08:28,200 - usbConfigMod - INFO - Found netmask at line 22: "    netmask 255.255.255.0"-->""
+2016-07-23 18:08:28,200 - usbConfigMod - INFO - Found network at line 23: "    network 192.168.42.0"-->""
+2016-07-23 18:08:28,200 - usbConfigMod - INFO - Found broadcast at line 24: "    broadcast 192.168.42.255"-->""
+2016-07-23 18:08:28,200 - usbConfigMod - INFO - End editting interface config
+2016-07-23 18:08:34,062 - usbConfigMod - INFO - Start editting interface config
+2016-07-23 18:08:34,076 - usbConfigMod - INFO - Found allow-hotplug usb0 at line 20: "allow-hotplug usb0"-->""
+2016-07-23 18:08:34,092 - usbConfigMod - INFO - Found auto usb0 at line 21: "auto usb0"-->""
+2016-07-23 18:08:34,092 - usbConfigMod - INFO - Found iface usb0 at line 22: "iface usb0 inet static"-->""
+2016-07-23 18:08:34,092 - usbConfigMod - INFO - Remove single newline
+2016-07-23 18:08:34,108 - usbConfigMod - INFO - Found address at line 23: "    address 192.168.42.42"-->""
+2016-07-23 18:08:34,108 - usbConfigMod - INFO - Found netmask at line 24: "    netmask 255.255.255.0"-->""
+2016-07-23 18:08:34,108 - usbConfigMod - INFO - Found network at line 25: "    network 192.168.42.0"-->""
+2016-07-23 18:08:34,108 - usbConfigMod - INFO - Found broadcast at line 26: "    broadcast 192.168.42.255"-->""
+2016-07-23 18:08:34,124 - usbConfigMod - INFO - End editting interface config
+2016-07-23 18:17:26,338 - usbConfigMod - INFO - Start editting interface config
+2016-07-23 18:17:26,338 - usbConfigMod - INFO - Found allow-hotplug usb0 at line 16: "allow-hotplug usb0"-->""
+2016-07-23 18:17:26,355 - usbConfigMod - INFO - Found auto usb0 at line 17: "auto usb0"-->""
+2016-07-23 18:17:26,355 - usbConfigMod - INFO - Found iface usb0 at line 18: "iface usb0 inet static"-->""
+2016-07-23 18:17:26,355 - usbConfigMod - INFO - Remove single newline
+2016-07-23 18:17:26,355 - usbConfigMod - INFO - Found address at line 19: "    address 192.168.42.42"-->""
+2016-07-23 18:17:26,355 - usbConfigMod - INFO - Found netmask at line 20: "    netmask 255.255.255.0"-->""
+2016-07-23 18:17:26,355 - usbConfigMod - INFO - Found network at line 21: "    network 192.168.42.0"-->""
+2016-07-23 18:17:26,355 - usbConfigMod - INFO - Found broadcast at line 22: "    broadcast 192.168.42.255"-->""
+2016-07-23 18:17:26,355 - usbConfigMod - INFO - End editting interface config
+2016-07-23 18:19:24,914 - usbConfigMod - INFO - Start editting interface config
+2016-07-23 18:19:24,944 - usbConfigMod - INFO - Found allow-hotplug usb0 at line 16: "allow-hotplug usb0"-->""
+2016-07-23 18:19:24,944 - usbConfigMod - INFO - Found auto usb0 at line 17: "auto usb0"-->""
+2016-07-23 18:19:24,944 - usbConfigMod - INFO - Found iface usb0 at line 18: "iface usb0 inet static"-->""
+2016-07-23 18:19:24,944 - usbConfigMod - INFO - Found address at line 19: "    address 192.168.42.42"-->""
+2016-07-23 18:19:24,944 - usbConfigMod - INFO - Found netmask at line 20: "    netmask 255.255.255.0"-->""
+2016-07-23 18:19:24,944 - usbConfigMod - INFO - Found network at line 21: "    network 192.168.42.0"-->""
+2016-07-23 18:19:24,944 - usbConfigMod - INFO - Found broadcast at line 22: "    broadcast 192.168.42.255"-->""
+2016-07-23 18:19:24,944 - usbConfigMod - INFO - End editting interface config
+2016-07-23 18:20:04,782 - usbConfigMod - INFO - Start editting interface config
+2016-07-23 18:20:04,782 - usbConfigMod - INFO - Found allow-hotplug usb0 at line 16: "allow-hotplug usb0"-->""
+2016-07-23 18:20:04,782 - usbConfigMod - INFO - Found auto usb0 at line 17: "auto usb0"-->""
+2016-07-23 18:20:04,799 - usbConfigMod - INFO - Found iface usb0 at line 18: "iface usb0 inet static"-->""
+2016-07-23 18:20:04,799 - usbConfigMod - INFO - Found address at line 19: "    address 192.168.42.42"-->""
+2016-07-23 18:20:04,799 - usbConfigMod - INFO - Found netmask at line 20: "    netmask 255.255.255.0"-->""
+2016-07-23 18:20:04,799 - usbConfigMod - INFO - Found network at line 21: "    network 192.168.42.0"-->""
+2016-07-23 18:20:04,799 - usbConfigMod - INFO - Found broadcast at line 22: "    broadcast 192.168.42.255"-->""
+2016-07-23 18:20:04,799 - usbConfigMod - INFO - End editting interface config
+2016-07-23 18:20:08,611 - usbConfigMod - INFO - Start editting interface config
+2016-07-23 18:20:08,611 - usbConfigMod - INFO - Found allow-hotplug usb0 at line 11: "allow-hotplug usb0"-->""
+2016-07-23 18:20:08,628 - usbConfigMod - INFO - Found auto usb0 at line 12: "auto usb0"-->""
+2016-07-23 18:20:08,628 - usbConfigMod - INFO - Found iface usb0 at line 13: "iface usb0 inet static"-->""
+2016-07-23 18:20:08,628 - usbConfigMod - INFO - Found address at line 14: "    address 192.168.42.42"-->""
+2016-07-23 18:20:08,628 - usbConfigMod - INFO - Found netmask at line 15: "    netmask 255.255.255.0"-->""
+2016-07-23 18:20:08,628 - usbConfigMod - INFO - Found network at line 16: "    network 192.168.42.0"-->""
+2016-07-23 18:20:08,628 - usbConfigMod - INFO - Found broadcast at line 17: "    broadcast 192.168.42.255"-->""
+2016-07-23 18:20:08,628 - usbConfigMod - INFO - End editting interface config

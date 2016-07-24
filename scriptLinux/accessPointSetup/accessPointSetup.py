@@ -18,10 +18,9 @@ INTERFACES_CONFIG_FILE_PATH = "/etc/network/interfaces"
 def InstallWifiAccessPointPkgs(logger):
     #installation here
     logger.info("Start installing WifiAccessPointPkgs")
-    ret = subprocess.call("apt-get install isc-dhcp-server hostapd")
-    if(ret.find("error")!=-1):
-        logger.error("Error when installing WifiAccessPointPkgs")
-    logger.info("End installing WifiAccessPointPkgs")
+    pc = subprocess.Popen("apt-get install isc-dhcp-server hostapd")
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
 def EditDhcpConfig(logger, filePath):
     logger.info("Start installing dhcp config")
     originFhd = open(filePath,'r+')
@@ -30,6 +29,7 @@ def EditDhcpConfig(logger, filePath):
     tempFhd = open(tempAbsPath,'w+')
     lineNum = 0
     needleStr = ""
+    replacedStr = ""
 
     subnet_string_dhcp_config = """subnet 192.168.42.0 netmask 255.255.255.0 {
 	range 192.168.42.10 192.168.42.50;
@@ -45,28 +45,31 @@ def EditDhcpConfig(logger, filePath):
         lineNum += 1
         #Change domain-name,domain-name-servers
         needleStr = 'option domain-name "example.org";'
+        replacedStr='#option domain-name "example.org";\n'#todo
         ret = line.find(needleStr)
         if(ret == 0):
-            logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
-            ret = line.replace(line,'#option domain-name "example.org";\n')
+            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+            line = line.replace(line,replacedStr)#todo
         elif(ret != 1 or line[0] != '#'):
-            logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
-            ret = line.replace(line,'#option domain-name "example.org";\n')
+            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+            line = line.replace(line,replacedStr)#todo
 
         needleStr = 'option domain-name-servers ns1.example.org, ns2.example.org;'
+        replacedStr='#option domain-name-servers ns1.example.org, ns2.example.org;'
         ret = line.find(needleStr)
         if(ret == 0):
-            logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
-            ret = line.replace(line,'#option domain-name-servers ns1.example.org, ns2.example.org;')
+            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+            line = line.replace(line,replacedStr)#todo
         elif(ret != 1 or line[0] != '#'):
-            logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
-            ret = line.replace(line,'#option domain-name-servers ns1.example.org, ns2.example.org;')   
+            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+            line = line.replace(line,replacedStr)#todo
     
         needleStr = 'authoritative;\n'
+        replacedStr='authoritative;\n'
         ret = line.find(needleStr)
         if(ret == 1 and line[0]=='#'):
-            logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
-            ret = line.replace(line,'authoritative;\n')  
+            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+            line = line.replace(line,replacedStr)#todo 
         tempFhd.write(line)      
 
         needleStr = subnet_string_dhcp_config
@@ -91,15 +94,17 @@ def EditIscDhcpServerConfig(logger, filePath):
     tempFhd = open(tempAbsPath,'w+')
     lineNum = 0
     needleStr = ""
+    replacedStr = ""
 
     for line in originFhd:
         lineNum += 1
         #Change domain-name,domain-name-servers
         needleStr = 'INTERFACES='
+        replacedStr = 'INTERFACES="wlan0"\n'
         ret = line.find(needleStr)
         if(ret == 0):
-            logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
-            ret = line.replace(line,'INTERFACES="wlan0" ')  
+            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+            line = line.replace(line,replacedStr)#todo  
         tempFhd.write(line)      
 
     originFhd.close()
@@ -156,14 +161,16 @@ def EditHostApdDefault(logger, filePath):
     ret = remove(tempAbsPath)  
     tempFhd = open(tempAbsPath,'w+')
 
+    
     for line in originFhd:
         lineNum += 1
         #Change domain-name,domain-name-servers
         needleStr = 'DAEMON_CONF='
+        replacedStr = 'DAEMON_CONF="/etc/hostapd/hostapd.conf"\n'
         ret = line.find(needleStr)
         if(ret == 0 or (ret ==1 and line[0] == '#')):
-            logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
-            ret = line.replace(line,'DAEMON_CONF="/etc/hostapd/hostapd.conf"\n')  
+            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+            line = line.replace(line,replacedStr)#todo 
         tempFhd.write(line)      
 
     originFhd.close()
