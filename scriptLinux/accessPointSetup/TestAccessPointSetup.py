@@ -20,7 +20,7 @@ def TestEditDhcpConfig(logger, fileName):
         copy(filePath+'.bk',filePath)
     BashHelper.StripAllCommentsFromScript(filePath)
     BashHelper.StripBlankLineFromScript(filePath)
-    accessPointSetup.EditDhcpConfig(logger,filePath)
+    accessPointSetup.EditDhcpConfig(logger,filePath,path.join(SCRIPT_DIR,'dhcpd.conf.template'))
 
 def TestEditIscDhcpServerConfig(logger, fileName):
     filePath = path.join(SCRIPT_DIR, fileName) 
@@ -60,10 +60,10 @@ def TestEditSysctlConfig(logger, fileName):
 
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('testWifiAPConfig',"./testWifiAPConfig.log")
-#    TestEditDhcpConfig(logger, "dhcpd.conf")
+    TestEditDhcpConfig(logger, "dhcpd.conf")
 #    TestStripAllCommentsFromScript(logger,"dhcpd.conf")
 #    TestEditIscDhcpServerConfig(logger, "isc-dhcp-server")
 #    TestEditInterfacesConfig(logger, "interfaces")
 #    TestEditHostApdConfig(logger, "hostapd.conf")
-    TestEditHostApdDefault(logger, "hostapd")
+#    TestEditHostApdDefault(logger, "hostapd")
 #    TestEditSysctlConfig(logger, "sysctl.conf")

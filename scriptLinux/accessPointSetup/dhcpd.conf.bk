@@ -105,3 +105,12 @@ log-facility local7;
 #    range 10.0.29.10 10.0.29.230;
 #  }
 #}
+subnet 172.10.10.0 netmask 255.255.255.0 {
+	range 172.10.10.10 172.10.10.50;
+	option broadcast-address 172.10.10.255;
+	option routers 172.10.10 .1;
+	default-lease-time 600;
+	max-lease-time 7200;
+	option domain-name "local";
+	option domain-name-servers 8.8.8.8, 8.8.4.4;
+}

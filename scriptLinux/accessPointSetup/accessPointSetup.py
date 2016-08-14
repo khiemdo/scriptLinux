@@ -5,7 +5,7 @@ SCRIPT_DIR = path.dirname(__file__)
 sys.path.append(path.join(SCRIPT_DIR,'..'))
 from BashUtility import BashHelper
 
-from shutil import move
+from shutil import move, copy
 from os import remove
 import subprocess
 
@@ -24,87 +24,13 @@ def InstallWifiAccessPointPkgs(logger):
     pc = subprocess.Popen("apt-get install isc-dhcp-server hostapd".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
-def EditDhcpConfig(logger, filePath):
+def EditDhcpConfig(logger, filePath,templatePath):
     logger.info("Start installing dhcp config")
-    originFhd = 0
-    try:
-        originFhd = open(filePath,'r+')
-    except OSError as err:
-        logger.info("No existed {}".format(filePath))
-        originFhd = open(filePath,'w+')
-        pass
-
-    tmpFileName = filePath+BashHelper.GenerateRandomCharSets(5)
-    tempAbsPath = path.join(SCRIPT_DIR, tmpFileName) 
-    try:
-        ret = remove(tempAbsPath)  
-    except OSError as err:
-        logger.info("No existed {} in working folder".format(tmpFileName))
-        pass  
-    tempFhd = open(tempAbsPath,'w+')
-    lineNum = 0
-    needleStr = ""
-    replacedStr = ""
-
-    subnet_string_dhcp_config = """subnet 172.10.10.0 netmask 255.255.255.0 {
-	range 172.10.10.10 172.10.10.50;
-	option broadcast-address 172.10.10.255;
-	option routers 172.10.10 .1;
-	default-lease-time 600;
-	max-lease-time 7200;
-	option domain-name "local";
-	option domain-name-servers 8.8.8.8, 8.8.4.4;
-}
-"""
-    subnet_string_dhcp_config_flag = 0
-    authoritative_flag = 0
-    for line in originFhd:
-        lineNum += 1
-        #Change domain-name,domain-name-servers
-        needleStr = 'option domain-name "example.org";'
-        replacedStr='#option domain-name "example.org";\n'
-        ret = line.find(needleStr)
-        if(ret != -1):
-            if(ret == 0):
-                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-                line = line.replace(line,replacedStr)
-            elif(ret != 1 or line[0] != '#'):
-                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-                line = line.replace(line,replacedStr)
-
-        needleStr = 'option domain-name-servers ns1.example.org, ns2.example.org;'
-        replacedStr='#option domain-name-servers ns1.example.org, ns2.example.org;'
-        ret = line.find(needleStr)
-        if(ret != -1):
-            if(ret == 0):
-                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-                line = line.replace(line,replacedStr)
-            elif(ret != 1 or line[0] != '#'):
-                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-                line = line.replace(line,replacedStr)
-        
-        #replace '#authoritative;' with 'authoritative;'
-        needleStr = 'authoritative' 
-        ret = line.find(needleStr)
-        if(ret != -1):
-            if(ret == 0 ):
-                authoritative_flag = 1
-    
-        needleStr = 'subnet 172.10.10.0 netmask 255.255.255.0'
-        ret = line.find(needleStr)
-        if(ret != -1):
-            logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
-            subnet_string_dhcp_config_flag=1
-        tempFhd.write(line)     
-
-    if(subnet_string_dhcp_config_flag == 0):
-        tempFhd.write(subnet_string_dhcp_config) 
-    if(authoritative_flag==0):
-        tempFhd.write('authoritative;\n') 
-    originFhd.close()
-    tempFhd.close()
-    ret = remove(filePath)
-    move(tempAbsPath,filePath)
+    if(path.isfile(filePath)):
+        remove(filePath)
+    if(path.isfile(templatePath) is False):
+        raise Exception('templatePath is not valid')
+    copy(templatePath,filePath)
     logger.info("End installing dhcp config")
 def EditIscDhcpServerConfig(logger, filePath):
     logger.info("Start installing IscDhcpServer config")
@@ -359,30 +285,51 @@ def EditSysctlConfig(logger, filePath):
     move(tempAbsPath,filePath)
     logger.info("End installing Sysctl config")
 def EditIp4_forward(logger):
-    logger.info('iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE')
-    pc = subprocess.Popen('iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE'.split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    logger.info('iptables-save')
+    pc = subprocess.Popen('iptables-save',stdout = subprocess.PIPE)
 
-    logger.info('iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT')
-    pc = subprocess.Popen('iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'.split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    iptableOutput = 0;
+    for line in pc.stdout:  
+        logger.info(line.rstrip())  
+        iptableOutput+=line
 
-    logger.info('iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT')
-    pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT'.split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    needleStr = '-A POSTROUTING -o eth0 -j MASQUERADE'
+    ret = line.find(needleStr)
+    if(ret==-1):
+        logger.info('iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE')
+        pc = subprocess.Popen('iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE'.split(),stdout = subprocess.PIPE)
+
+    needleStr = '-A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'
+    ret = line.find(needleStr)
+    if(ret==-1):
+        logger.info('iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT')
+        pc = subprocess.Popen('iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'.split(),stdout = subprocess.PIPE)
+
+    needleStr = '-A FORWARD -i wlan0 -o eth0 -j ACCEPT'
+    ret = line.find(needleStr)
+    if(ret==-1):
+        logger.info('iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT')
+        pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT'.split(),stdout = subprocess.PIPE)
 
     ###########################
-    logger.info('iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE')
-    pc = subprocess.Popen('iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE'.split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    needleStr = '-A POSTROUTING -o wlan1 -j MASQUERADE'
+    ret = line.find(needleStr)
+    if(ret==-1):
+        logger.info('iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE')
+        pc = subprocess.Popen('iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE'.split(),stdout = subprocess.PIPE)
 
-    logger.info('iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT')
-    pc = subprocess.Popen('iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'.split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    needleStr = '-A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'
+    ret = line.find(needleStr)
+    if(ret==-1):
+        logger.info('iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT')
+        pc = subprocess.Popen('iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'.split(),stdout = subprocess.PIPE)
 
-    logger.info('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT')
-    pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT'.split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    needleStr = '-A FORWARD -i wlan0 -o wlan1 -j ACCEPT'
+    ret = line.find(needleStr)
+    if(ret==-1):
+        logger.info('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT')
+        pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT'.split(),stdout = subprocess.PIPE)
+
 
     filePath='/etc/iptables.ipv4.nat'
     if(path.isfile(filePath)):

@@ -66,7 +66,11 @@
     </Content>
     <Content Include="accessPointSetup\dhcpd.conf" />
     <Content Include="accessPointSetup\dhcpd.conf.bk" />
+    <Content Include="accessPointSetup\dhcpd.conf.template">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="accessPointSetup\hostapd" />
+    <Content Include="accessPointSetup\hostapd.conf" />
     <Content Include="accessPointSetup\interfaces" />
     <Content Include="accessPointSetup\interfaces.bk" />
     <Content Include="accessPointSetup\isc-dhcp-server" />
