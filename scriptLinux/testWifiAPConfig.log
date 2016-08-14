@@ -112,3 +112,52 @@
 2016-08-14 23:59:37,862 - testWifiAPConfig - INFO - Found net.ipv4.ip_forward at line 28: "#net.ipv4.ip_forward=1"-->""
 2016-08-14 23:59:37,865 - testWifiAPConfig - INFO - add net.ipv4.ip_forward=1
 2016-08-14 23:59:37,868 - testWifiAPConfig - INFO - End installing Sysctl config
+2016-08-15 01:08:43,647 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-15 01:08:43,651 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confqjDbC in working folder
+2016-08-15 01:08:43,651 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-15 01:08:43,654 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-15 01:08:43,657 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 01:10:05,184 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-15 01:10:05,190 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confGEKip in working folder
+2016-08-15 01:10:05,191 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-15 01:10:05,193 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-15 01:10:05,197 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 01:10:46,841 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-15 01:10:46,845 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confZZxGn in working folder
+2016-08-15 01:10:46,848 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-15 01:10:46,851 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-15 01:10:46,855 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 01:11:23,438 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-15 01:11:23,441 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confRVCrH in working folder
+2016-08-15 01:11:27,403 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-15 01:11:27,404 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-15 01:11:27,408 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 01:11:34,540 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-15 01:11:34,545 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confUTeDg in working folder
+2016-08-15 01:11:34,548 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-15 01:11:34,549 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-15 01:11:34,552 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 01:11:56,759 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-15 01:11:56,778 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confKsqrz in working folder
+2016-08-15 01:11:56,780 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-15 01:11:56,783 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-15 01:11:56,789 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 01:12:15,513 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-15 01:12:15,519 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confszlGC in working folder
+2016-08-15 01:12:18,026 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-15 01:12:19,153 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-15 01:12:24,607 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 01:15:31,056 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-15 01:15:31,062 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confQVxFv in working folder
+2016-08-15 01:15:31,065 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-15 01:15:31,066 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-15 01:15:31,075 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 01:16:06,566 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-15 01:16:06,573 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confTOPdh in working folder
+2016-08-15 01:16:06,575 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-15 01:16:06,576 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-15 01:16:06,585 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 01:20:03,802 - testWifiAPConfig - INFO - Start installing HostApd Defautl
+2016-08-15 01:20:03,822 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-15 01:20:03,823 - testWifiAPConfig - INFO - Found DAEMON_CONF= at line 10: "#DAEMON_CONF="""-->"DAEMON_CONF="/etc/hostapd/hostapd.conf""
+2016-08-15 01:20:03,832 - testWifiAPConfig - INFO - Ending installing HostApd Defautl

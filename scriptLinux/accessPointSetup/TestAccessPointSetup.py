@@ -36,7 +36,7 @@ def TestEditInterfacesConfig(logger, fileName):
     accessPointSetup.EditInterfacesConfig(logger,filePath)
     BashHelper.StripAllCommentsFromScript(filePath)
     BashHelper.StripBlankLineFromScript(filePath)
-def TestEditHostApdDefault(logger, fileName):
+def TestEditHostApdConfig(logger, fileName):
     filePath = path.join(SCRIPT_DIR, fileName) 
     if(path.isfile(filePath+'.bk')):
         copy(filePath+'.bk',filePath)
@@ -60,10 +60,10 @@ def TestEditSysctlConfig(logger, fileName):
 
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('testWifiAPConfig',"./testWifiAPConfig.log")
-    TestEditDhcpConfig(logger, "dhcpd.conf")
-    TestStripAllCommentsFromScript(logger,"dhcpd.conf")
-    TestEditIscDhcpServerConfig(logger, "isc-dhcp-server")
-    TestEditInterfacesConfig(logger, "interfaces")
-    TestEditHostApdDefault(logger, "hostapd.conf")
+#    TestEditDhcpConfig(logger, "dhcpd.conf")
+#    TestStripAllCommentsFromScript(logger,"dhcpd.conf")
+#    TestEditIscDhcpServerConfig(logger, "isc-dhcp-server")
+#    TestEditInterfacesConfig(logger, "interfaces")
+#    TestEditHostApdConfig(logger, "hostapd.conf")
     TestEditHostApdDefault(logger, "hostapd")
-    TestEditSysctlConfig(logger, "sysctl.conf")
+#    TestEditSysctlConfig(logger, "sysctl.conf")

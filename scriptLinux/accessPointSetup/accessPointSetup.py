@@ -15,6 +15,8 @@ INTERFACES_CONFIG_FILE_PATH = "/etc/network/interfaces"
 HOSTAPD_CONFIG_FILE_PATH = "/etc/hostapd/hostapd.conf"
 HOSTAPD_DEFAULT_FILE_PATH = "/etc/default/hostapd"
 SYSCTL_CONF_PATH = "/etc/sysctl.conf"
+SSID = 'fnick2812PI'
+WPA_PASSPHASE = 'default1234'
 
 def InstallWifiAccessPointPkgs(logger):
     #installation here
@@ -52,8 +54,10 @@ def EditDhcpConfig(logger, filePath):
 	max-lease-time 7200;
 	option domain-name "local";
 	option domain-name-servers 8.8.8.8, 8.8.4.4;
-}"""
+}
+"""
     subnet_string_dhcp_config_flag = 0
+    authoritative_flag = 0
     for line in originFhd:
         lineNum += 1
         #Change domain-name,domain-name-servers
@@ -80,15 +84,13 @@ def EditDhcpConfig(logger, filePath):
                 line = line.replace(line,replacedStr)
         
         #replace '#authoritative;' with 'authoritative;'
-        needleStr = 'authoritative;\n'
-        replacedStr='authoritative;\n'
+        needleStr = 'authoritative' 
         ret = line.find(needleStr)
         if(ret != -1):
-            if(ret == 1 and line[0]=='#'):
-                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-                line = line.replace(line,replacedStr)
+            if(ret == 0 ):
+                authoritative_flag = 1
     
-        needleStr = subnet_string_dhcp_config
+        needleStr = 'subnet 172.10.10.0 netmask 255.255.255.0'
         ret = line.find(needleStr)
         if(ret != -1):
             logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
@@ -96,7 +98,9 @@ def EditDhcpConfig(logger, filePath):
         tempFhd.write(line)     
 
     if(subnet_string_dhcp_config_flag == 0):
-        tempFhd.write(subnet_string_dhcp_config)   
+        tempFhd.write(subnet_string_dhcp_config) 
+    if(authoritative_flag==0):
+        tempFhd.write('authoritative;\n') 
     originFhd.close()
     tempFhd.close()
     ret = remove(filePath)
@@ -247,35 +251,18 @@ up iptables-restore < /etc/iptables.ipv4.nat
 def EditHostApdConfig(logger, filePath):
     logger.info("Start installing HostApd config")
     hostapd_configuration_string = """
-# This is the name of the WiFi interface we configured above
 interface=wlan0
-# Use the nl80211 driver with the brcmfmac driver
 driver=nl80211
-# This is the name of the network
-ssid=PiTester-AP
-# Use the 2.4GHz band
 hw_mode=g
-# Use channel 6
 channel=6
-# Enable 802.11n
 ieee80211n=1
-# Enable WMM
 wmm_enabled=1
-# Enable 40MHz channels with 20ns guard interval
 ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
-# Accept all MAC addresses
 macaddr_acl=0
-# Use WPA authentication
 auth_algs=1
-# Require clients to know the network name
 ignore_broadcast_ssid=0
-# Use WPA2
 wpa=2
-# Use a pre-shared key
 wpa_key_mgmt=WPA-PSK
-# The network passphrase
-wpa_passphrase=default
-# Use AES, instead of TKIP
 rsn_pairwise=CCMP
 """
     tmpFileName = filePath+BashHelper.GenerateRandomCharSets(5)
@@ -287,6 +274,8 @@ rsn_pairwise=CCMP
         pass 
     tempFhd = open(tempAbsPath,'w+')
     tempFhd.write(hostapd_configuration_string)
+    tempFhd.write('ssid='+SSID+'\n')
+    tempFhd.write('wpa_passphrase='+WPA_PASSPHASE+'\n')
     tempFhd.close() 
     if (path.isfile(filePath)):
         ret = remove(filePath)  
