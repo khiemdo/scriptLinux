@@ -1,7 +1,10 @@
 import logging
 import sys
 from shutil import move, copy
+from os import remove
 from os import path
+import string
+import random
 
 def SetupLogger(fileName,fileDirName):
     logger = logging.getLogger(fileName)
@@ -18,10 +21,56 @@ def SetupLogger(fileName,fileDirName):
     logFileHd.setFormatter(formatter)
     logger.addHandler(logFileHd)
     return logger
-
 def CheckOutputOfCallingBash(process, logger):
     for line in process.stdout:
         logger.info(line.rstrip())
-
 def BackupFileBfMod(filePath,backupDir,logger):
     copy(filePath,path.join(backupDir, path.basename(filePath)+'.bk'))
+
+def GenerateRandomCharSets(numChars):
+    return ''.join(random.choice(string.ascii_letters) for x in range(numChars))
+
+def StripAllCommentsFromScript(filePath):
+    originFhd = open(filePath,'r+')
+    tmpFileName = filePath+GenerateRandomCharSets(5)
+    try:
+        ret = remove(tmpFileName)  
+    except OSError as err:
+        pass  
+    tempFhd = open(tmpFileName,'w+')
+    lineNum = 0
+    needleStr = "" 
+
+    for line in originFhd:
+        lineNum += 1
+        needleStr = '#'
+        ret = line.find(needleStr)
+        if(ret != 0):
+            tempFhd.write(line)  
+        
+    originFhd.close()
+    tempFhd.close()
+    ret = remove(filePath)
+    move(tmpFileName,filePath) 
+
+def StripBlankLineFromScript(filePath):
+    originFhd = open(filePath,'r+')
+    tmpFileName = filePath+GenerateRandomCharSets(5)
+    try:
+        ret = remove(tmpFileName)  
+    except OSError as err:
+        pass  
+    tempFhd = open(tmpFileName,'w+')
+    lineNum = 0
+    needleStr = "" 
+
+    for line in originFhd:
+        lineNum += 1
+        line = line.rstrip()
+        if(line != ''):
+            tempFhd.write(line+'\n')  
+
+    originFhd.close()
+    tempFhd.close()
+    ret = remove(filePath)
+    move(tmpFileName,filePath) 

@@ -1,0 +1,114 @@
+2016-08-14 20:52:06,079 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-14 20:52:08,783 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 20:53:35,246 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 1: "#"-->"#option domain-name "example.org";"
+2016-08-14 20:53:35,249 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 1: "#option domain-name "example.org";"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-14 20:53:42,710 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "# Sample configuration file for ISC dhcpd for Debian"-->"#option domain-name "example.org";"
+2016-08-14 20:57:45,769 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-14 20:57:59,375 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 13: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-14 20:58:25,292 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 14: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-14 20:58:39,591 - testWifiAPConfig - INFO - Found authoritative; at line 21: "#authoritative;"-->"authoritative;"
+2016-08-14 20:58:39,601 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-14 21:43:58,266 - testWifiAPConfig - INFO - Start installing IscDhcpServer config
+2016-08-14 21:43:58,285 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 21:43:58,286 - testWifiAPConfig - INFO - Found INTERFACES= at line 21: "INTERFACES="""-->"INTERFACES="wlan0""
+2016-08-14 21:43:58,319 - testWifiAPConfig - INFO - End installing IscDhcpServer config
+2016-08-14 21:44:28,624 - testWifiAPConfig - INFO - Start installing IscDhcpServer config
+2016-08-14 21:44:34,414 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 21:44:51,914 - testWifiAPConfig - INFO - Found INTERFACES= at line 21: "INTERFACES="""-->"INTERFACES="wlan0""
+2016-08-14 21:45:00,298 - testWifiAPConfig - INFO - End installing IscDhcpServer config
+2016-08-14 21:46:20,073 - testWifiAPConfig - INFO - Start installing IscDhcpServer config
+2016-08-14 21:46:20,078 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 21:46:20,081 - testWifiAPConfig - INFO - Found INTERFACES= at line 21: "INTERFACES="""-->"INTERFACES="wlan0""
+2016-08-14 21:46:20,088 - testWifiAPConfig - INFO - End installing IscDhcpServer config
+2016-08-14 22:36:22,316 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-14 22:36:22,323 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 22:36:22,325 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 13: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-14 22:36:22,328 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 14: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-14 22:36:22,328 - testWifiAPConfig - INFO - Found authoritative; at line 21: "#authoritative;"-->"authoritative;"
+2016-08-14 22:36:22,338 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-14 22:36:39,663 - testWifiAPConfig - INFO - Start installing IscDhcpServer config
+2016-08-14 22:36:39,665 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 22:36:39,667 - testWifiAPConfig - INFO - Found INTERFACES= at line 21: "INTERFACES="""-->"INTERFACES="wlan0""
+2016-08-14 22:36:39,671 - testWifiAPConfig - INFO - End installing IscDhcpServer config
+2016-08-14 22:39:33,651 - testWifiAPConfig - INFO - Start installing IscDhcpServer config
+2016-08-14 22:39:33,661 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 22:39:33,664 - testWifiAPConfig - INFO - End installing IscDhcpServer config
+2016-08-14 22:40:10,038 - testWifiAPConfig - INFO - Start installing interfaces config
+2016-08-14 22:43:31,209 - testWifiAPConfig - INFO - Start installing interfaces config
+2016-08-14 22:43:59,226 - testWifiAPConfig - INFO - Found allow-hotplug wlan0 at line 5: "allow-hotplug wlan0"-->""
+2016-08-14 22:44:05,542 - testWifiAPConfig - INFO - Found iface wlan0 at line 6: "iface wlan0 inet manual"-->""
+2016-08-14 22:44:34,339 - testWifiAPConfig - INFO - Found next iface after wlan0: "iface wlan1 inet manual"
+2016-08-14 22:45:40,954 - testWifiAPConfig - INFO - End installing interfaces config
+2016-08-14 22:59:47,549 - testWifiAPConfig - INFO - Start installing interfaces config
+2016-08-14 22:59:47,552 - testWifiAPConfig - INFO - Found allow-hotplug wlan0 at line 5: "allow-hotplug wlan0"-->""
+2016-08-14 22:59:47,555 - testWifiAPConfig - INFO - Found iface wlan0 at line 6: "iface wlan0 inet manual"-->""
+2016-08-14 22:59:47,555 - testWifiAPConfig - INFO - Found next iface after wlan0: "iface wlan1 inet manual"
+2016-08-14 22:59:47,559 - testWifiAPConfig - INFO - End installing interfaces config
+2016-08-14 23:02:04,638 - testWifiAPConfig - INFO - Start installing interfaces config
+2016-08-14 23:02:04,644 - testWifiAPConfig - INFO - Found allow-hotplug wlan0 at line 5: "allow-hotplug wlan0"-->""
+2016-08-14 23:02:04,645 - testWifiAPConfig - INFO - Found iface wlan0 at line 6: "iface wlan0 inet manual"-->""
+2016-08-14 23:02:04,647 - testWifiAPConfig - INFO - Found next iface after wlan0: "iface wlan1 inet manual"
+2016-08-14 23:02:04,653 - testWifiAPConfig - INFO - End installing interfaces config
+2016-08-14 23:13:11,381 - testWifiAPConfig - INFO - Start installing interfaces config
+2016-08-14 23:13:33,908 - testWifiAPConfig - INFO - End installing interfaces config
+2016-08-14 23:13:34,326 - testWifiAPConfig - INFO - Start installing HostApd config
+2016-08-14 23:13:47,831 - testWifiAPConfig - INFO - Start installing HostApd config
+2016-08-14 23:14:03,278 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:15:23,615 - testWifiAPConfig - INFO - Start installing HostApd config
+2016-08-14 23:15:23,618 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:16:25,811 - testWifiAPConfig - INFO - Start installing HostApd config
+2016-08-14 23:16:33,278 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:17:09,637 - testWifiAPConfig - INFO - Start installing HostApd config
+2016-08-14 23:17:09,661 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:17:12,499 - testWifiAPConfig - INFO - End installing HostApd config
+2016-08-14 23:41:47,845 - testWifiAPConfig - INFO - Start installing HostApd Defautl
+2016-08-14 23:41:47,854 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:42:33,305 - testWifiAPConfig - INFO - Start installing HostApd Defautl
+2016-08-14 23:42:40,282 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:42:50,892 - testWifiAPConfig - INFO - Found DAEMON_CONF= at line 10: "#DAEMON_CONF="""-->"DAEMON_CONF="/etc/hostapd/hostapd.conf""
+2016-08-14 23:43:00,331 - testWifiAPConfig - INFO - Ending installing HostApd Defautl
+2016-08-14 23:49:21,904 - testWifiAPConfig - INFO - Start installing Sysctl config
+2016-08-14 23:49:21,908 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:49:36,062 - testWifiAPConfig - INFO - Found net.ipv4.ip_forward at line 28: "#net.ipv4.ip_forward=1"-->""
+2016-08-14 23:49:40,198 - testWifiAPConfig - INFO - add net.ipv4.ip_forward=1
+2016-08-14 23:49:40,204 - testWifiAPConfig - INFO - End installing Sysctl config
+2016-08-14 23:58:37,075 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-14 23:58:37,079 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confBKbMl in working folder
+2016-08-14 23:58:37,082 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-14 23:58:37,082 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-14 23:58:37,088 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-14 23:59:22,167 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-14 23:59:22,174 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confHFKaW in working folder
+2016-08-14 23:59:22,174 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-14 23:59:22,177 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-14 23:59:22,180 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-14 23:59:22,196 - testWifiAPConfig - INFO - Start installing IscDhcpServer config
+2016-08-14 23:59:22,198 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:59:22,200 - testWifiAPConfig - INFO - Found INTERFACES= at line 21: "INTERFACES="""-->"INTERFACES="wlan0""
+2016-08-14 23:59:22,203 - testWifiAPConfig - INFO - End installing IscDhcpServer config
+2016-08-14 23:59:37,756 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-14 23:59:37,762 - testWifiAPConfig - INFO - No existed C:\Users\T540P\documents\visual studio 2015\Projects\scriptLinux\scriptLinux\accessPointSetup\dhcpd.confOvXDx in working folder
+2016-08-14 23:59:37,763 - testWifiAPConfig - INFO - Found option domain-name "example.org"; at line 2: "option domain-name "example.org";"-->"#option domain-name "example.org";"
+2016-08-14 23:59:37,765 - testWifiAPConfig - INFO - Found option domain-name-servers ns1.example.org, ns2.example.org; at line 3: "option domain-name-servers ns1.example.org, ns2.example.org;"-->"#option domain-name-servers ns1.example.org, ns2.example.org;"
+2016-08-14 23:59:37,769 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-14 23:59:37,782 - testWifiAPConfig - INFO - Start installing IscDhcpServer config
+2016-08-14 23:59:37,783 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:59:37,786 - testWifiAPConfig - INFO - Found INTERFACES= at line 21: "INTERFACES="""-->"INTERFACES="wlan0""
+2016-08-14 23:59:37,789 - testWifiAPConfig - INFO - End installing IscDhcpServer config
+2016-08-14 23:59:37,799 - testWifiAPConfig - INFO - Start installing interfaces config
+2016-08-14 23:59:37,802 - testWifiAPConfig - INFO - Found allow-hotplug wlan0 at line 5: "allow-hotplug wlan0"-->""
+2016-08-14 23:59:37,805 - testWifiAPConfig - INFO - Found iface wlan0 at line 6: "iface wlan0 inet manual"-->""
+2016-08-14 23:59:37,809 - testWifiAPConfig - INFO - Found next iface after wlan0: "iface wlan1 inet manual"
+2016-08-14 23:59:37,813 - testWifiAPConfig - INFO - End installing interfaces config
+2016-08-14 23:59:37,822 - testWifiAPConfig - INFO - Start installing HostApd Defautl
+2016-08-14 23:59:37,823 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:59:37,828 - testWifiAPConfig - INFO - Ending installing HostApd Defautl
+2016-08-14 23:59:37,838 - testWifiAPConfig - INFO - Start installing HostApd Defautl
+2016-08-14 23:59:37,842 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:59:37,844 - testWifiAPConfig - INFO - Found DAEMON_CONF= at line 10: "#DAEMON_CONF="""-->"DAEMON_CONF="/etc/hostapd/hostapd.conf""
+2016-08-14 23:59:37,846 - testWifiAPConfig - INFO - Ending installing HostApd Defautl
+2016-08-14 23:59:37,857 - testWifiAPConfig - INFO - Start installing Sysctl config
+2016-08-14 23:59:37,859 - testWifiAPConfig - INFO - No existed tempFile in the current folder
+2016-08-14 23:59:37,862 - testWifiAPConfig - INFO - Found net.ipv4.ip_forward at line 28: "#net.ipv4.ip_forward=1"-->""
+2016-08-14 23:59:37,865 - testWifiAPConfig - INFO - add net.ipv4.ip_forward=1
+2016-08-14 23:59:37,868 - testWifiAPConfig - INFO - End installing Sysctl config

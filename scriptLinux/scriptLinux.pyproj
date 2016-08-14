@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>b0d8fc5b-4315-4204-938f-6560b0905d10</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>usbInterface\usbInterface.py</StartupFile>
+    <StartupFile>accessPointSetup\TestAccessPointSetup.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,6 +23,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="accessPointSetup\accessPointSetup.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="accessPointSetup\TestAccessPointSetup.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BashUtility\BashHelper.py">
@@ -61,19 +64,27 @@
     <Content Include="accessPointSetup\accessPointSetup.sh">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="lavernaInstall\laverna.vs">
+    <Content Include="accessPointSetup\dhcpd.conf" />
+    <Content Include="accessPointSetup\dhcpd.conf.bk" />
+    <Content Include="accessPointSetup\hostapd" />
+    <Content Include="accessPointSetup\interfaces" />
+    <Content Include="accessPointSetup\interfaces.bk" />
+    <Content Include="accessPointSetup\isc-dhcp-server" />
+    <Content Include="accessPointSetup\isc-dhcp-server.bk" />
+    <Content Include="accessPointSetup\sysctl.conf" />
+    <Content Include="lavernaInstall\laverna">
       <SubType>Code</SubType>
     </Content>
     <Content Include="lavernaInstall\npmInstall.sh">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="nginxFromSource\default" />
     <Content Include="nginxFromSource\nginx.conf" />
     <Content Include="nginxFromSource\nginx.service">
       <SubType>Code</SubType>
     </Content>
     <Content Include="nginxFromSource\nginxFromSource.sh" />
     <Content Include="piSetup\10-network-device.rules" />
+    <Content Include="piSetup\dhcpd.conf" />
     <Content Include="piSetup\interfaces" />
     <Content Include="piSetup\nginx\fastcgi.conf" />
     <Content Include="piSetup\nginx\fastcgi_params" />

@@ -1,0 +1,19 @@
+source-directory /etc/network/interfaces.d
+auto lo
+iface lo inet loopback
+iface eth0 inet manual
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+allow-hotplug usb0
+auto usb0
+iface usb0 inet static
+    address 192.168.42.42
+    netmask 255.255.255.0
+    network 192.168.42.0
+    broadcast 192.168.42.255
+allow-hotplug wlan0
+iface wlan0 inet static
+    address 172.10.10.1
+    netmask 255.255.255.0
+    network 172.10.10.0
+    broadcast 172.10.10.255
+up iptables-restore < /etc/iptables.ipv4.nat
