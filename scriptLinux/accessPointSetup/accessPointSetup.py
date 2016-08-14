@@ -330,7 +330,6 @@ def EditIp4_forward(logger):
         logger.info('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT')
         pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT'.split(),stdout = subprocess.PIPE)
 
-
     filePath='/etc/iptables.ipv4.nat'
     if(path.isfile(filePath)):
         remove(filePath)
