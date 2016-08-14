@@ -384,10 +384,16 @@ def EditIp4_forward(logger):
     pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
-    logger.info('iptables-save > /etc/iptables.ipv4.nat')
-    pc = subprocess.Popen('iptables-save > /etc/iptables.ipv4.nat'.split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
-
+    filePath='/etc/iptables.ipv4.nat'
+    if(path.isfile(filePath)):
+        remove(filePath)
+    originFhd = open(filePath,'w+')
+    logger.info('iptables-save')
+    pc = subprocess.Popen('iptables-save',stdout = subprocess.PIPE)
+    for line in pc.stdout:  
+        logger.info(line.rstrip())  
+        originFhd.write(line)
+    originFhd.close()
 
 
 if __name__ == "__main__":
