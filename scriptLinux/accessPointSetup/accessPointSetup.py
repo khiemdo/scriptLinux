@@ -384,8 +384,8 @@ def EditIp4_forward(logger):
     pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
-    logger.info('sh -c "iptables-save > /etc/iptables.ipv4.nat"')
-    pc = subprocess.Popen('sh -c "iptables-save > /etc/iptables.ipv4.nat"'.split(),stdout = subprocess.PIPE)
+    logger.info('iptables-save > /etc/iptables.ipv4.nat')
+    pc = subprocess.Popen('iptables-save > /etc/iptables.ipv4.nat'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
 
@@ -430,8 +430,8 @@ if __name__ == "__main__":
     BashHelper.StripBlankLineFromScript(filePath)
     EditSysctlConfig(logger,filePath)
 
-    logger.info('sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"')
-    pc = subprocess.Popen('sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"'.split(),stdout = subprocess.PIPE)
+    logger.info('echo 1 > /proc/sys/net/ipv4/ip_forward')
+    pc = subprocess.Popen('echo 1 > /proc/sys/net/ipv4/ip_forward'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     EditIp4_forward(logger)
