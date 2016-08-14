@@ -369,7 +369,7 @@ def EditSysctlConfig(logger, filePath):
     ret = remove(filePath)
     move(tempAbsPath,filePath)
     logger.info("End installing Sysctl config")
-def EditIp4_forward():
+def EditIp4_forward(logger):
     logger.info('iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE')
     pc = subprocess.Popen('iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
@@ -444,6 +444,8 @@ if __name__ == "__main__":
     logger.info('sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward')
     pc = subprocess.Popen('sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
+
+    EditIp4_forward(logger)
     logger.info('/usr/sbin/hostapd /etc/hostapd/hostapd.conf')
     pc = subprocess.Popen('/usr/sbin/hostapd /etc/hostapd/hostapd.conf'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
