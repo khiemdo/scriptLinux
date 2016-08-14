@@ -337,8 +337,8 @@ def EditIp4_forward():
 
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('wifiAPConfig',"./wifiAPConfig.log")
-    InstallWifiAccessPointPkgs(logger)
-#    BashHelper.BackupFileBfMod(DHCP_CONFIG_FILE_PATH,SCRIPT_DIR,logger)
+#    InstallWifiAccessPointPkgs(logger)
+    BashHelper.BackupFileBfMod(DHCP_CONFIG_FILE_PATH,SCRIPT_DIR,logger)
 #    EditDhcpConfig(logger,DHCP_CONFIG_FILE_PATH)
 #    BashHelper.BackupFileBfMod(ISC_DHCP_SERVER_CONFIG_FILE_PATH,SCRIPT_DIR,logger)
 #    EditIscDhcpServerConfig(logger,ISC_DHCP_SERVER_CONFIG_FILE_PATH)
