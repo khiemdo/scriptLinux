@@ -32,7 +32,11 @@ def GenerateRandomCharSets(numChars):
     return ''.join(random.choice(string.ascii_letters) for x in range(numChars))
 
 def StripAllCommentsFromScript(filePath):
-    originFhd = open(filePath,'r+')
+    if(path.isfile(filePath)):
+        originFhd = open(filePath,'r+')
+    else:
+        originFhd = open(filePath,'w+')
+    
     tmpFileName = filePath+GenerateRandomCharSets(5)
     try:
         ret = remove(tmpFileName)  
@@ -55,7 +59,10 @@ def StripAllCommentsFromScript(filePath):
     move(tmpFileName,filePath) 
 
 def StripBlankLineFromScript(filePath):
-    originFhd = open(filePath,'r+')
+    if(path.isfile(filePath)):
+        originFhd = open(filePath,'r+')
+    else:
+        originFhd = open(filePath,'w+')
     tmpFileName = filePath+GenerateRandomCharSets(5)
     try:
         ret = remove(tmpFileName)  
