@@ -20,9 +20,6 @@ def SetupLogger(fileName,fileDirName):
 def CheckOutputOfCallingBash(process, logger):
     for line in process.stdout:
         logger.info(line.rstrip())
-        if(line.find("Error")!=-1):
-            logger.error("Error when installing")
-            sys.exit()
 
 def BackupFileBfMod(filePath,backupDir,logger):
     copy(filePath,path.join(backupDir, path.basename(filePath)+'.bk'))
