@@ -24,23 +24,30 @@ def InstallWifiAccessPointPkgs(logger):
 
 def EditDhcpConfig(logger, filePath):
     logger.info("Start installing dhcp config")
+    originFhd = 0
+    try:
+        originFhd = open(filePath,'r+')
+    except OSError as err:
+        logger.info("No existed {}".format(filePath))
+        originFhd = open(filePath,'w+')
+        pass
 
-    originFhd = open(filePath,'r+')
-    tempAbsPath = path.join(SCRIPT_DIR, "tmpVsftpd") 
+    tmpFileName = filePath+BashHelper.GenerateRandomCharSets(5)
+    tempAbsPath = path.join(SCRIPT_DIR, tmpFileName) 
     try:
         ret = remove(tempAbsPath)  
     except OSError as err:
-        logger.info("No existed tempFile in the current folder")
+        logger.info("No existed {} in working folder".format(tmpFileName))
         pass  
     tempFhd = open(tempAbsPath,'w+')
     lineNum = 0
     needleStr = ""
     replacedStr = ""
 
-    subnet_string_dhcp_config = """subnet 192.168.42.0 netmask 255.255.255.0 {
-	range 192.168.42.10 192.168.42.50;
-	option broadcast-address 192.168.42.255;
-	option routers 192.168.42.1;
+    subnet_string_dhcp_config = """subnet 172.10.10.0 netmask 255.255.255.0 {
+	range 172.10.10.10 172.10.10.50;
+	option broadcast-address 172.10.10.255;
+	option routers 172.10.10 .1;
 	default-lease-time 600;
 	max-lease-time 7200;
 	option domain-name "local";
@@ -53,36 +60,40 @@ def EditDhcpConfig(logger, filePath):
         needleStr = 'option domain-name "example.org";'
         replacedStr='#option domain-name "example.org";\n'
         ret = line.find(needleStr)
-        if(ret == 0):
-            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)
-        elif(ret != 1 or line[0] != '#'):
-            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)
+        if(ret != -1):
+            if(ret == 0):
+                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+                line = line.replace(line,replacedStr)
+            elif(ret != 1 or line[0] != '#'):
+                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+                line = line.replace(line,replacedStr)
 
         needleStr = 'option domain-name-servers ns1.example.org, ns2.example.org;'
         replacedStr='#option domain-name-servers ns1.example.org, ns2.example.org;'
         ret = line.find(needleStr)
-        if(ret == 0):
-            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)
-        elif(ret != 1 or line[0] != '#'):
-            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)
-    
+        if(ret != -1):
+            if(ret == 0):
+                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+                line = line.replace(line,replacedStr)
+            elif(ret != 1 or line[0] != '#'):
+                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+                line = line.replace(line,replacedStr)
+        
+        #replace '#authoritative;' with 'authoritative;'
         needleStr = 'authoritative;\n'
         replacedStr='authoritative;\n'
         ret = line.find(needleStr)
-        if(ret == 1 and line[0]=='#'):
-            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)
-        tempFhd.write(line)      
-
+        if(ret != -1):
+            if(ret == 1 and line[0]=='#'):
+                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+                line = line.replace(line,replacedStr)
+    
         needleStr = subnet_string_dhcp_config
         ret = line.find(needleStr)
         if(ret != -1):
             logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
             subnet_string_dhcp_config_flag=1
+        tempFhd.write(line)     
 
     if(subnet_string_dhcp_config_flag == 0):
         tempFhd.write(subnet_string_dhcp_config)   
@@ -93,9 +104,15 @@ def EditDhcpConfig(logger, filePath):
     logger.info("End installing dhcp config")
 def EditIscDhcpServerConfig(logger, filePath):
     logger.info("Start installing IscDhcpServer config")
-
-    originFhd = open(filePath,'r+')
-    tempAbsPath = path.join(SCRIPT_DIR, "tmpVsftpd") 
+    originFhd = 0
+    try:
+        originFhd = open(filePath,'r+')
+    except OSError as err:
+        logger.info("No existed {}".format(filePath))
+        originFhd = open(filePath,'w+')
+        pass
+    tmpFileName = filePath+BashHelper.GenerateRandomCharSets(5)
+    tempAbsPath = path.join(SCRIPT_DIR, tmpFileName) 
     try:
         ret = remove(tempAbsPath)  
     except OSError as err:
@@ -112,9 +129,10 @@ def EditIscDhcpServerConfig(logger, filePath):
         needleStr = 'INTERFACES='
         replacedStr = 'INTERFACES="wlan0"\n'
         ret = line.find(needleStr)
-        if(ret == 0 or ret == 1):
-            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
-            line = line.replace(line,replacedStr)#todo  
+        if(ret!=-1):
+            if(ret == 0 or ret == 1):
+                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))#todo
+                line = line.replace(line,replacedStr)#todo  
         tempFhd.write(line)      
 
     originFhd.close()
@@ -124,11 +142,15 @@ def EditIscDhcpServerConfig(logger, filePath):
     logger.info("End installing IscDhcpServer config")
 def EditInterfacesConfig(logger, filePath):
     logger.info("Start installing interfaces config")
-
-    script_dir = path.dirname(__file__)
-
     originFhd = open(filePath,'r+')
-    tempAbsPath = path.join(script_dir, "tmpAccessPointInterface") 
+
+    tmpFileName = filePath+BashHelper.GenerateRandomCharSets(5)
+    tempAbsPath = path.join(SCRIPT_DIR, tmpFileName) 
+    try:
+        ret = remove(tempAbsPath)  
+    except OSError as err:
+        pass  
+
     tempFhd = open(tempAbsPath,'w+')
     tempConfigStr = ""
     tempConfigStr1 = ""
@@ -145,6 +167,14 @@ def EditInterfacesConfig(logger, filePath):
 
         #remove "auto wlan0"
         needleStr = "auto wlan0"
+        replacedStr = "\n"
+        ret = line.find(needleStr)
+        if(ret != -1):
+            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))
+            line = line.replace(line,replacedStr)
+
+        #remove "up iptables-restore < /etc/iptables.ipv4.nat"
+        needleStr = "iptables-restore"
         replacedStr = "\n"
         ret = line.find(needleStr)
         if(ret != -1):
@@ -186,10 +216,11 @@ def EditInterfacesConfig(logger, filePath):
     #loop through btw iface wlan0 and the next iface to remove all the line
     for line in tempConfigStr.splitlines():
         lineNum += 1
-        line = line + '\n'
         if (lineNumber_iface_wlan0<=lineNum and lineNum<=lineNumber_iface_next_after_wlan0):
-            line=""
-        tempConfigStr1+=line   
+            pass
+        else:
+            line = line + '\n'
+            tempConfigStr1+=line   
 
     iface_wlan0_config_string = """allow-hotplug wlan0
 iface wlan0 inet static  
@@ -204,10 +235,9 @@ up iptables-restore < /etc/iptables.ipv4.nat
     lineNum = 0
     for line in tempConfigStr1.splitlines():
         lineNum += 1
-        line = line+'\n'
-        if(line == '\n'):
-            line = ""
-        tempFhd.write(line);
+        if(line != '\n'):
+            line = line+'\n'
+            tempFhd.write(line);
 
     tempFhd.close()
     ret = remove(filePath)
@@ -248,22 +278,33 @@ wpa_passphrase=default
 # Use AES, instead of TKIP
 rsn_pairwise=CCMP
 """
-
-    tempAbsPath = path.join(script_dir, "tmpVsftpd") 
+    tmpFileName = filePath+BashHelper.GenerateRandomCharSets(5)
+    tempAbsPath = path.join(SCRIPT_DIR, tmpFileName) 
     try:
         ret = remove(tempAbsPath)  
     except OSError as err:
         logger.info("No existed tempFile in the current folder")
         pass 
     tempFhd = open(tempAbsPath,'w+')
-    tempFhd.write(hostapd_configuration_string) 
-    ret = remove(filePath)  
+    tempFhd.write(hostapd_configuration_string)
+    tempFhd.close() 
+    if (path.isfile(filePath)):
+        ret = remove(filePath)  
+    
     move(tempAbsPath,filePath) 
     logger.info("End installing HostApd config")
 def EditHostApdDefault(logger, filePath):
     logger.info("Start installing HostApd Defautl")
-    originFhd = open(filePath,'r+')
-    tempAbsPath = path.join(script_dir, "tmpVsftpd") 
+    originFhd = 0
+    try:
+        originFhd = open(filePath,'r+')
+    except OSError as err:
+        logger.info("No existed {}".format(filePath))
+        originFhd = open(filePath,'w+')
+        pass
+
+    tmpFileName = filePath+BashHelper.GenerateRandomCharSets(5)
+    tempAbsPath = path.join(SCRIPT_DIR, tmpFileName) 
     try:
         ret = remove(tempAbsPath)  
     except OSError as err:
@@ -271,7 +312,7 @@ def EditHostApdDefault(logger, filePath):
         pass
     tempFhd = open(tempAbsPath,'w+')
 
-    
+    lineNum = 0
     for line in originFhd:
         lineNum += 1
         #Change domain-name,domain-name-servers
@@ -290,9 +331,23 @@ def EditHostApdDefault(logger, filePath):
     logger.info("Ending installing HostApd Defautl")
 def EditSysctlConfig(logger, filePath):
     logger.info("Start installing Sysctl config")
-    originFhd = open(filePath,'r+')
-    tempAbsPath = path.join(script_dir, "tmpSysctlConf") 
+    originFhd = 0
+    try:
+        originFhd = open(filePath,'r+')
+    except OSError as err:
+        logger.info("No existed {}".format(filePath))
+        originFhd = open(filePath,'w+')
+        pass
+
+    tmpFileName = filePath+BashHelper.GenerateRandomCharSets(5)
+    tempAbsPath = path.join(SCRIPT_DIR, tmpFileName) 
+    try:
+        ret = remove(tempAbsPath)  
+    except OSError as err:
+        logger.info("No existed tempFile in the current folder")
+        pass
     tempFhd = open(tempAbsPath,'w+')
+
     lineNum = 0
     needleStr = ""
     replacedStr = ""
@@ -327,44 +382,80 @@ def EditIp4_forward():
     pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
+    ###########################
+    logger.info('iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE')
+    pc = subprocess.Popen('iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
+    logger.info('iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT')
+    pc = subprocess.Popen('iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
+    logger.info('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT')
+    pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
     logger.info('sh -c "iptables-save > /etc/iptables.ipv4.nat"')
     pc = subprocess.Popen('sh -c "iptables-save > /etc/iptables.ipv4.nat"'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
 
 
-
-
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('wifiAPConfig',"./wifiAPConfig.log")
-#    InstallWifiAccessPointPkgs(logger)
-#    BashHelper.BackupFileBfMod(DHCP_CONFIG_FILE_PATH,SCRIPT_DIR,logger)
-    EditDhcpConfig(logger,DHCP_CONFIG_FILE_PATH)
-#    BashHelper.BackupFileBfMod(ISC_DHCP_SERVER_CONFIG_FILE_PATH,SCRIPT_DIR,logger)
-#    EditIscDhcpServerConfig(logger,ISC_DHCP_SERVER_CONFIG_FILE_PATH)
-#    BashHelper.BackupFileBfMod(INTERFACES_CONFIG_FILE_PATH,SCRIPT_DIR,logger)
-#    EditInterfacesConfig(logger,INTERFACES_CONFIG_FILE_PATH)
-#   BashHelper.BackupFileBfMod(HOSTAPD_CONFIG_FILE_PATH,SCRIPT_DIR,logger)
-#    EditHostApdConfig(logger,HOSTAPD_CONFIG_FILE_PATH)
-#    BashHelper.BackupFileBfMod(HOSTAPD_DEFAULT_FILE_PATH,SCRIPT_DIR,logger)
-#   EditHostApdDefault(logger,HOSTAPD_DEFAULT_FILE_PATH)
-#    BashHelper.BackupFileBfMod(SYSCTL_CONF_PATH,SCRIPT_DIR,logger)
-#    EditSysctlConfig(logger,SYSCTL_CONF_PATH)
-#    logger.info('sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward')
-#    pc = subprocess.Popen('sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward'.split(),stdout = subprocess.PIPE)
-#    BashHelper.CheckOutputOfCallingBash(pc,logger)
-#    logger.info('/usr/sbin/hostapd /etc/hostapd/hostapd.conf')
-#    pc = subprocess.Popen('/usr/sbin/hostapd /etc/hostapd/hostapd.conf'.split(),stdout = subprocess.PIPE)
-#    BashHelper.CheckOutputOfCallingBash(pc,logger)
-#    logger.info('service hostapd start')
-#    pc = subprocess.Popen('service hostapd enable'.split(),stdout = subprocess.PIPE)
-#    BashHelper.CheckOutputOfCallingBash(pc,logger)
-#    logger.info('service isc-dhcp-server start')
-#    pc = subprocess.Popen('service isc-dhcp-server enable'.split(),stdout = subprocess.PIPE)
-#    BashHelper.CheckOutputOfCallingBash(pc,logger)
-#    logger.info('service hostapd start')
-#    pc = subprocess.Popen('service hostapd enable'.split(),stdout = subprocess.PIPE)
-#    BashHelper.CheckOutputOfCallingBash(pc,logger)
-#    logger.info('service isc-dhcp-server start')
-#   pc = subprocess.Popen('service isc-dhcp-server enable'.split(),stdout = subprocess.PIPE)
-#    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    InstallWifiAccessPointPkgs(logger)
+
+    filePath=DHCP_CONFIG_FILE_PATH
+    BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
+    BashHelper.StripAllCommentsFromScript(filePath)
+    BashHelper.StripBlankLineFromScript(filePath)
+    EditDhcpConfig(logger,filePath)
+
+    filePath=ISC_DHCP_SERVER_CONFIG_FILE_PATH
+    BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
+    BashHelper.StripAllCommentsFromScript(filePath)
+    BashHelper.StripBlankLineFromScript(filePath)
+    EditIscDhcpServerConfig(logger,filePath)
+
+    filePath=INTERFACES_CONFIG_FILE_PATH
+    BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
+    BashHelper.StripAllCommentsFromScript(filePath)
+    BashHelper.StripBlankLineFromScript(filePath)
+    EditInterfacesConfig(logger,filePath)
+
+    filePath=HOSTAPD_CONFIG_FILE_PATH
+    BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
+    BashHelper.StripAllCommentsFromScript(filePath)
+    BashHelper.StripBlankLineFromScript(filePath)
+    EditHostApdConfig(logger,filePath)
+
+    filePath=HOSTAPD_DEFAULT_FILE_PATH
+    BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
+    BashHelper.StripAllCommentsFromScript(filePath)
+    BashHelper.StripBlankLineFromScript(filePath)
+    EditHostApdDefault(logger,filePath)
+
+    filePath=SYSCTL_CONF_PATH
+    BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
+    BashHelper.StripAllCommentsFromScript(filePath)
+    BashHelper.StripBlankLineFromScript(filePath)
+    EditSysctlConfig(logger,filePath)
+
+    logger.info('sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward')
+    pc = subprocess.Popen('sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    logger.info('/usr/sbin/hostapd /etc/hostapd/hostapd.conf')
+    pc = subprocess.Popen('/usr/sbin/hostapd /etc/hostapd/hostapd.conf'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    logger.info('service hostapd enable')
+    pc = subprocess.Popen('service hostapd enable'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    logger.info('service isc-dhcp-server enable')
+    pc = subprocess.Popen('service isc-dhcp-server enable'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    logger.info('service hostapd start')
+    pc = subprocess.Popen('service hostapd start'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    logger.info('service isc-dhcp-server start')
+    pc = subprocess.Popen('service isc-dhcp-server start'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
