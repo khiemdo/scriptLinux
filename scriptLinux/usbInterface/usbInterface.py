@@ -16,8 +16,6 @@ CONFIG_FILE_DIR = "/etc/network/"
 def EditUSBIntefaceConfig(logger, filePath):
     logger.info("Start editting interface config")
     script_dir = path.dirname(__file__)
-    #copy config for backup
-    copy(filePath,path.join(script_dir, path.basename(filePath)+'.bk'))
 
     originFhd = open(filePath,'r+')
     tempAbsPath = path.join(script_dir, "tmpUsbInterface") 
@@ -142,7 +140,8 @@ iface usb0 inet static
 
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('usbConfigMod',"./usbConfigMod.log")
-
-    filePath = path.join(SCRIPT_DIR, CONFIG_FILE_NAME) 
-#   filePath = CONFIG_FILE_DIR + CONFIG_FILE_NAME
+    script_dir = path.dirname(__file__)
+#    filePath = path.join(SCRIPT_DIR, CONFIG_FILE_NAME) 
+    filePath = CONFIG_FILE_DIR + CONFIG_FILE_NAME
+    BashHelper.BackupFileBfMod(filePath,script_dir,logger)
     EditUSBIntefaceConfig(logger,filePath)
