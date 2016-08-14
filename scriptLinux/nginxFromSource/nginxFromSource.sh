@@ -4,7 +4,8 @@ BASE_FOLDER=$1
 #stop and exit on first error
 set -e 
 #install dependencies
-apt-get install -y build-essential automake libxml2-dev libxslt1-dev python-dev libgd2-dev libperl-dev
+apt-get update
+apt-get install -y build-essential automake libxml2-dev libxslt1-dev python-dev libgd2-dev libperl-dev libssl-dev libpcre3-dev libpcre++-dev
 
 # names of latest versions of each package
 export VERSION_PCRE=pcre-8.39
@@ -90,7 +91,7 @@ cd $VERSION_NGINX
 --error-log-path=/var/log/nginx/error.log \
 --http-log-path=/var/log/nginx/access.log \
 --pid-path=/run/nginx.pid \
---lock-path=/run/lock/subsys/nginx \
+--lock-path=/var/run/nginx.lock \
 --with-file-aio \
 --with-ipv6 \
 --with-http_ssl_module \
@@ -114,12 +115,19 @@ cd $VERSION_NGINX
 --with-mail_ssl_module \
 --with-debug \
 --with-http_ssl_module --with-stream \
---with-pcre=../pcre-8.39 \
---with-zlib=../zlib-1.2.8 \
+--with-pcre=../$VERSION_PCRE \
+--with-zlib=../$VERSION_ZLIB \
+--with-openssl=../$VERSION_OPENSSL --with-openssl-opt="enable-tlsext"  \
 --add-dynamic-module=../nginxModules/echo-nginx-module \
 --add-dynamic-module=../nginxModules/headers-more-nginx-module
+
 make
 make install
+
+mkdir /etc/nginx/sites-available
+mkdir /etc/nginx/sites-enabled
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/fnick2812Pi.key -out /etc/ssl/certs/fnick2812Pi.crt
 
 #install startup script
 cp ./nginx.service /lib/systemd/system
@@ -137,3 +145,5 @@ rm -f $VERSION_NGINX.tar.gz
 #rm -rf zlib*
 #rm -rf openssl*
 #rm -rf nginx*
+
+

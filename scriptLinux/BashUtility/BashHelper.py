@@ -1,4 +1,5 @@
 import logging
+import sys
 
 def SetupLogger(fileName,fileDirName):
     logger = logging.getLogger(fileName)
@@ -19,9 +20,9 @@ def SetupLogger(fileName,fileDirName):
 def CheckOutputOfCallingBash(process, logger):
     for line in process.stdout:
         logger.info(line.rstrip())
-        if(line.find("error")!=-1):
-            logger.error("Error when installing vsftpd")
+        if(line.find("Error")!=-1):
+            logger.error("Error when installing")
             sys.exit()
 
-def BackupFileBfMod(filePath,logger):
-    copy(filePath,path.join(script_dir, path.basename(filePath)+'.bk'))
+def BackupFileBfMod(filePath,backupDir,logger):
+    copy(filePath,path.join(backupDir, path.basename(filePath)+'.bk'))

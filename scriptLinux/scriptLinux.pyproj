@@ -31,6 +31,9 @@
     <Compile Include="BashUtility\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="lavernaInstall\lavernaInstall.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="scriptLinux.py" />
     <Compile Include="usbInterface\usbInterface.py">
       <SubType>Code</SubType>
@@ -42,6 +45,7 @@
   <ItemGroup>
     <Folder Include="accessPointSetup\" />
     <Folder Include="BashUtility\" />
+    <Folder Include="lavernaInstall\" />
     <Folder Include="nginxFromSource\" />
     <Folder Include="piSetup\" />
     <Folder Include="piSetup\nginx\" />
@@ -55,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="accessPointSetup\accessPointSetup.sh">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="lavernaInstall\laverna.vs">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="lavernaInstall\npmInstall.sh">
       <SubType>Code</SubType>
     </Content>
     <Content Include="nginxFromSource\default" />

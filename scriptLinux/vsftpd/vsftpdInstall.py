@@ -29,8 +29,6 @@ def InstallVsfptd(logger):
 
 def EditVsftpdConfig(logger,filePath):
     logger.info("Start editting vsftpd config")
-    #copy config for backup
-    copy(filePath,path.join(SCRIPT_DIR, path.basename(filePath)+'.bk'))
     originFhd = open(filePath,'r+')
     #tempFile, tempAbsPath = mkstemp()
 
@@ -90,7 +88,8 @@ def EditVsftpdConfig(logger,filePath):
 
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('vsftpdInstall',"./vsftpdInstall.log")
-    filePath = path.join(SCRIPT_DIR, CONFIG_FILE_NAME) 
-#   filePath = CONFIG_FILE_DIR + CONFIG_FILE_NAME
-#   InstallVsfptd(logger)
+#    filePath = path.join(SCRIPT_DIR, CONFIG_FILE_NAME) 
+    filePath = CONFIG_FILE_DIR + CONFIG_FILE_NAME
+    InstallVsfptd(logger)
+    BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
     EditVsftpdConfig(logger,filePath)
