@@ -73,6 +73,7 @@
     <Content Include="accessPointSetup\hostapd.conf" />
     <Content Include="accessPointSetup\interfaces" />
     <Content Include="accessPointSetup\interfaces.bk" />
+    <Content Include="accessPointSetup\iptables.ipv4.nat" />
     <Content Include="accessPointSetup\isc-dhcp-server" />
     <Content Include="accessPointSetup\isc-dhcp-server.bk" />
     <Content Include="accessPointSetup\sysctl.conf" />

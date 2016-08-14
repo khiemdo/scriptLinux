@@ -284,53 +284,44 @@ def EditSysctlConfig(logger, filePath):
     ret = remove(filePath)
     move(tempAbsPath,filePath)
     logger.info("End installing Sysctl config")
-def EditIp4_forward(logger):
-    logger.info('iptables-save')
-    pc = subprocess.Popen('iptables-save',stdout = subprocess.PIPE)
-
-    iptableOutput = 0;
-    for line in pc.stdout:  
-        logger.info(line.rstrip())  
-        iptableOutput+=line
-
+def EditIp4_forward(logger,iptableOutput, filePath):
     needleStr = '-A POSTROUTING -o eth0 -j MASQUERADE'
-    ret = line.find(needleStr)
+    ret = iptableOutput.find(needleStr)
     if(ret==-1):
         logger.info('iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE')
         pc = subprocess.Popen('iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE'.split(),stdout = subprocess.PIPE)
 
     needleStr = '-A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'
-    ret = line.find(needleStr)
+    ret = iptableOutput.find(needleStr)
     if(ret==-1):
         logger.info('iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT')
         pc = subprocess.Popen('iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'.split(),stdout = subprocess.PIPE)
 
     needleStr = '-A FORWARD -i wlan0 -o eth0 -j ACCEPT'
-    ret = line.find(needleStr)
+    ret = iptableOutput.find(needleStr)
     if(ret==-1):
         logger.info('iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT')
         pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT'.split(),stdout = subprocess.PIPE)
 
     ###########################
     needleStr = '-A POSTROUTING -o wlan1 -j MASQUERADE'
-    ret = line.find(needleStr)
+    ret = iptableOutput.find(needleStr)
     if(ret==-1):
         logger.info('iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE')
         pc = subprocess.Popen('iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE'.split(),stdout = subprocess.PIPE)
 
     needleStr = '-A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'
-    ret = line.find(needleStr)
+    ret = iptableOutput.find(needleStr)
     if(ret==-1):
         logger.info('iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT')
         pc = subprocess.Popen('iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT'.split(),stdout = subprocess.PIPE)
 
     needleStr = '-A FORWARD -i wlan0 -o wlan1 -j ACCEPT'
-    ret = line.find(needleStr)
+    ret = iptableOutput.find(needleStr)
     if(ret==-1):
         logger.info('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT')
         pc = subprocess.Popen('iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT'.split(),stdout = subprocess.PIPE)
 
-    filePath='/etc/iptables.ipv4.nat'
     if(path.isfile(filePath)):
         remove(filePath)
     originFhd = open(filePath,'w+')
@@ -350,7 +341,7 @@ if __name__ == "__main__":
     BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
     BashHelper.StripAllCommentsFromScript(filePath)
     BashHelper.StripBlankLineFromScript(filePath)
-    EditDhcpConfig(logger,filePath)
+    EditDhcpConfig(logger,filePath,path.join(SCRIPT_DIR,'dhcpd.conf.template'))
 
     filePath=ISC_DHCP_SERVER_CONFIG_FILE_PATH
     BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
@@ -386,7 +377,14 @@ if __name__ == "__main__":
     pc = subprocess.Popen('echo 1 > /proc/sys/net/ipv4/ip_forward'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
-    EditIp4_forward(logger)
+    logger.info('iptables-save')
+    pc = subprocess.Popen('iptables-save',stdout = subprocess.PIPE)
+
+    iptableOutput = "";
+    for line in pc.stdout:  
+        logger.info(line.rstrip())  
+        iptableOutput=iptableOutput+line
+    EditIp4_forward(logger,iptableOutput,'/etc/iptables.ipv4.nat')
     logger.info('service hostapd start')
     pc = subprocess.Popen('service hostapd start'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)

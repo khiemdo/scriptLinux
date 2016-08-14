@@ -196,3 +196,6 @@
 2016-08-15 03:02:33,290 - testWifiAPConfig - INFO - End installing dhcp config
 2016-08-15 03:03:50,907 - testWifiAPConfig - INFO - Start installing dhcp config
 2016-08-15 03:03:50,911 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 04:04:55,467 - testWifiAPConfig - INFO - Start installing dhcp config
+2016-08-15 04:04:55,473 - testWifiAPConfig - INFO - End installing dhcp config
+2016-08-15 04:05:27,210 - testWifiAPConfig - INFO - iptables-save
