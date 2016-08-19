@@ -37,6 +37,9 @@
     <Compile Include="lavernaInstall\lavernaInstall.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="plexServer\plexInstall.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="scriptLinux.py" />
     <Compile Include="usbInterface\usbInterface.py">
       <SubType>Code</SubType>
@@ -49,6 +52,7 @@
     <Folder Include="accessPointSetup\" />
     <Folder Include="BashUtility\" />
     <Folder Include="lavernaInstall\" />
+    <Folder Include="plexServer\" />
     <Folder Include="nginxFromSource\" />
     <Folder Include="piSetup\" />
     <Folder Include="piSetup\nginx\" />
@@ -111,6 +115,9 @@
     <Content Include="piSetup\nginx\ssl\owncloud.key" />
     <Content Include="piSetup\nginx\uwsgi_params" />
     <Content Include="piSetup\nginx\win-utf" />
+    <Content Include="plexServer\plexInstall.sh">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="usbInterface\interfaces" />
     <Content Include="vsftpd\vsftpd.conf" />
   </ItemGroup>

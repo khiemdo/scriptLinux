@@ -377,7 +377,7 @@ if __name__ == "__main__":
     pc = subprocess.Popen('echo 1 > /proc/sys/net/ipv4/ip_forward'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
-    logger.info('iptables-save')
+    logger.info('check uiptables-save')
     pc = subprocess.Popen('iptables-save',stdout = subprocess.PIPE)
 
     iptableOutput = "";
