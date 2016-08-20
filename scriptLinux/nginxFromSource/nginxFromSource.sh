@@ -78,8 +78,6 @@ make depend
 make
 make install
 
-#./configure --user=www-data --group=www-data --sbin-path=/usr/local/nginx/nginx --conf-path=/usr/local/nginx/nginx.conf--pid-path=/usr/local/nginx/nginx.pid --with-pcre=/home/pi/pcre-8.39 --with-zlib=/home/pi/zlib-1.2.8 --with-http_ssl_module --with-stream --add-dynamic-module=/home/pi/nginxModules/echo-nginx-module --add-dynamic-module=/home/pi/nginxModules/headers-more-nginx-module
-
 cd $BASE_FOLDER/nginxBuild
 cd $VERSION_NGINX
 ./configure \

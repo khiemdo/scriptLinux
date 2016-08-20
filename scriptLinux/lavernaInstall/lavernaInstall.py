@@ -32,7 +32,7 @@ def DownloadLavernaSource(logger):
     BashHelper.CheckOutputOfCallingBash(pc,logger) 
     pc = subprocess.Popen("git clone https://github.com/Laverna/static-laverna laverna".split(),stdout = subprocess.PIPE)#todo
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    pc = subprocess.Popen("chown www-data:www:data laverna".split(),stdout = subprocess.PIPE)#todo
+    pc = subprocess.Popen("chown www-data:www-data laverna".split(),stdout = subprocess.PIPE)#todo
     BashHelper.CheckOutputOfCallingBash(pc,logger)
     logger.info("End download laverna source")
 

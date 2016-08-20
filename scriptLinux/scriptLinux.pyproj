@@ -118,6 +118,9 @@
     <Content Include="plexServer\plexInstall.sh">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="plexServer\plexInstall64Adm.sh">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="usbInterface\interfaces" />
     <Content Include="vsftpd\vsftpd.conf" />
   </ItemGroup>
