@@ -1,0 +1,26 @@
+upstream plex-upstream {
+        server localhost:32400;
+}
+server {
+        listen 443 ssl;
+        ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+        ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+        
+        server_name _;
+
+		index index.html index.htm index.nginx-debian.html;
+
+        location /web {
+                # serve the CSS code
+                proxy_pass http://plex-upstream;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+        location /plex {
+                # proxy request to plex server
+                proxy_pass http://plex-upstream/web;
+        }
+
+}

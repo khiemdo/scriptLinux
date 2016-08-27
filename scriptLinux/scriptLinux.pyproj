@@ -37,6 +37,9 @@
     <Compile Include="lavernaInstall\lavernaInstall.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="plexServer\plex">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="plexServer\plexInstall.py">
       <SubType>Code</SubType>
     </Compile>
@@ -52,6 +55,9 @@
     <Folder Include="accessPointSetup\" />
     <Folder Include="BashUtility\" />
     <Folder Include="lavernaInstall\" />
+    <Folder Include="gogsInstall\" />
+    <Folder Include="dockerRapbian\" />
+    <Folder Include="seafileInstallation\" />
     <Folder Include="plexServer\" />
     <Folder Include="nginxFromSource\" />
     <Folder Include="piSetup\" />
@@ -81,6 +87,12 @@
     <Content Include="accessPointSetup\isc-dhcp-server" />
     <Content Include="accessPointSetup\isc-dhcp-server.bk" />
     <Content Include="accessPointSetup\sysctl.conf" />
+    <Content Include="dockerRapbian\dockerInstall.sh">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="gogsInstall\gogsInstall.sh">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="lavernaInstall\laverna">
       <SubType>Code</SubType>
     </Content>
@@ -119,6 +131,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="plexServer\plexInstall64Adm.sh">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="seafileInstallation\seafileInstall.sh">
       <SubType>Code</SubType>
     </Content>
     <Content Include="usbInterface\interfaces" />
