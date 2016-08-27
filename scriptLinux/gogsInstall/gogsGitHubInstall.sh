@@ -7,7 +7,8 @@ set -e
 apt-get update
 apt-get install git wget 
 
-git clone https://github.com/gogits/gogs.git
+rm -rf gogs
+git clone https://github.com/gogits/gogs.git && cd gogs
 rm -f Dockerfile
 mv Dockerfile.rpi Dockerfile
 mkdir -p /data
