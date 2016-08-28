@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>b0d8fc5b-4315-4204-938f-6560b0905d10</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>seafileInstallation\phpmyadminInstall.py</StartupFile>
+    <StartupFile>phpmyadmin\phpmyadminInstall.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -44,13 +44,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="scriptLinux.py" />
-    <Compile Include="seafileInstallation\phpmyadmin">
+    <Compile Include="phpmyadmin\phpmyadmin.conf">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="seafileInstallation\phpmyadminInstall.py">
+    <Compile Include="phpmyadmin\phpmyadminInstall.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="seafileInstallation\TestPhpMyAdminInstall.py">
+    <Compile Include="seafileInstallation\seafileInstall.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="phpmyadmin\TestPhpMyAdminInstall.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="usbInterface\usbInterface.py">
@@ -66,6 +69,7 @@
     <Folder Include="lavernaInstall\" />
     <Folder Include="gogsInstall\" />
     <Folder Include="dockerRapbian\" />
+    <Folder Include="phpmyadmin\" />
     <Folder Include="seafileInstallation\" />
     <Folder Include="plexServer\" />
     <Folder Include="nginxFromSource\" />
@@ -142,10 +146,13 @@
     <Content Include="plexServer\plexInstall64Adm.sh">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="seafileInstallation\phpmyadminInstall.sh">
+    <Content Include="phpmyadmin\phpmyadminInstall.sh">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="seafileInstallation\ports.conf">
+    <Content Include="phpmyadmin\ports.conf">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="seafileInstallation\seafile">
       <SubType>Code</SubType>
     </Content>
     <Content Include="seafileInstallation\seafileInstall.sh">
