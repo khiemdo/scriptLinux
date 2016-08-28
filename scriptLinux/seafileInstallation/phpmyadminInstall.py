@@ -132,14 +132,14 @@ def EditApachePortConf(logger, filePath):
 def AddApacheVirtualServer(logger,filePath,destFilePath, lnFilePath):
     logger.info("Start AddApacheVirtualServer")
 
-    cmdStr = "rm -rf" + destFilePath
+    cmdStr = "rm -rf " + destFilePath
     logger.info("exec {}".format(cmdStr))
     pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     copy(filePath, destFilePath)
 
-    cmdStr = "rm -rf" + lnFilePath
+    cmdStr = "rm -rf " + lnFilePath
     logger.info("exec {}".format(cmdStr))
     pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     BashHelper.StripBlankLineFromScript(filePath)
     EditApachePortConf(logger,filePath)
 
-    pc = subprocess.Popen("rm /etc/apache2/sites-available/*default*".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("rm -rf /etc/apache2/sites-available/*default*".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     AddApacheVirtualServer(logger,"./phpmyadmin","/etc/apache2/sites-available/phpmyadmin","/etc/apache2/sites-enabled/phpmyadmin")
