@@ -133,16 +133,19 @@ def AddApacheVirtualServer(logger,filePath,destFilePath, lnFilePath):
     logger.info("Start AddApacheVirtualServer")
 
     cmdStr = "rm -rf" + destFilePath
+    logger.info("exec {}".format(cmdStr))
     pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     copy(filePath, destFilePath)
 
     cmdStr = "rm -rf" + lnFilePath
+    logger.info("exec {}".format(cmdStr))
     pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     cmdStr = "ln -s " + destFilePath + " " + lnFilePath
+    logger.info("exec {}".format(cmdStr))
     pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
     logger.info("End AddApacheVirtualServer")
@@ -150,6 +153,9 @@ def AddApacheVirtualServer(logger,filePath,destFilePath, lnFilePath):
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('phpmyadminnstall',"./phpmyadminnstall.log")
     RunPhpMyAdminInstallScript(logger)
+
+    pc = subprocess.Popen("rm /etc/apache2/sites-available/*default*".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     filePath=APACHE_PORT_CONFIG_FILE_PATH
     BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
