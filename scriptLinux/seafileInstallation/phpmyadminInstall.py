@@ -90,7 +90,7 @@ def EditApachePortConf(logger, filePath):
         ret = line.find(needleStr)
         if(ret != -1):
             logger.info("Found {} at line {}: \"{}\"".format(needleStr.strip(),lineNum,line.rstrip()))
-            lineSSLModuleEnd = lineNum
+            lineIfEnd = lineNum
             break;
 
     lineNum = 0
@@ -109,14 +109,18 @@ def EditApachePortConf(logger, filePath):
     tempConfigStr1 = ""
 
     lineNum = 0
+    replaceFlag = 1
     for line in tempConfigStr.splitlines():
         lineNum += 1
-        needleStr = "Listen 80"
-        replacedStr = "Listen " + REPLACEMENT_OF_DEFAULT_SHTTP_PORT
-        ret = line.find(needleStr)
-        if(ret != -1):
-            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))
-            line = line.replace(line,replacedStr)
+        if(replaceFlag>0):
+            needleStr = "Listen"
+            replacedStr = "Listen " + REPLACEMENT_OF_DEFAULT_SHTTP_PORT
+            ret = line.find(needleStr)
+            if(ret != -1):
+                logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))
+                line = line.replace(line,replacedStr)
+                replaceFlag-=1
+
         line = line + '\n'
         tempConfigStr1+=line
     tempConfigStr = tempConfigStr1
