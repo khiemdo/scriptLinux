@@ -156,18 +156,24 @@ def AddApacheVirtualServer(logger,filePath,destFilePath, lnFilePath):
 
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('phpmyadminnstall',"./phpmyadminnstall.log")
-#    RunPhpMyAdminInstallScript(logger)
-#
-#    pc = subprocess.Popen("rm /etc/apache2/sites-available/*default*".split(),stdout = subprocess.PIPE)
-#    BashHelper.CheckOutputOfCallingBash(pc,logger)
-#
-#    filePath=APACHE_PORT_CONFIG_FILE_PATH
-#    BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
-#    BashHelper.StripAllCommentsFromScript(filePath)
-#    BashHelper.StripBlankLineFromScript(filePath)
-#    EditApachePortConf(logger,filePath)
-#
-#    pc = subprocess.Popen("rm -rf /etc/apache2/sites-available/*default*".split(),stdout = subprocess.PIPE)
-#    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    RunPhpMyAdminInstallScript(logger)
+
+    pc = subprocess.Popen("rm /etc/apache2/sites-available/*default*".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
+    filePath=APACHE_PORT_CONFIG_FILE_PATH
+    BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
+    BashHelper.StripAllCommentsFromScript(filePath)
+    BashHelper.StripBlankLineFromScript(filePath)
+    EditApachePortConf(logger,filePath)
+
+    pc = subprocess.Popen("cp /etc/apache2/sites-available/*default* ./".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen("rm -rf /etc/apache2/sites-available/*default* ./".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen("cp /etc/apache2/sites-enabled/*default* ./".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen("rm -rf /etc/apache2/sites-enabled/*default* ./".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     AddApacheVirtualServer(logger,"./phpmyadmin","/etc/apache2/sites-available/phpmyadmin","/etc/apache2/sites-enabled/phpmyadmin")
