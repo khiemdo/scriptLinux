@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>b0d8fc5b-4315-4204-938f-6560b0905d10</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>accessPointSetup\TestAccessPointSetup.py</StartupFile>
+    <StartupFile>seafileInstallation\phpmyadminInstall.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -44,6 +44,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="scriptLinux.py" />
+    <Compile Include="seafileInstallation\phpmyadmin">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="seafileInstallation\phpmyadminInstall.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="seafileInstallation\TestPhpMyAdminInstall.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="usbInterface\usbInterface.py">
       <SubType>Code</SubType>
     </Compile>
@@ -133,7 +142,19 @@
     <Content Include="plexServer\plexInstall64Adm.sh">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="seafileInstallation\phpmyadminInstall.sh">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="seafileInstallation\ports.conf">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="seafileInstallation\seafileInstall.sh">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="seafileInstallation\seafileInstallSqlite.sh">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="seafileInstallation\seafileInstallMysql.sh">
       <SubType>Code</SubType>
     </Content>
     <Content Include="usbInterface\interfaces" />
