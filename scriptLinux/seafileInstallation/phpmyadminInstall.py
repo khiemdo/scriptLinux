@@ -131,10 +131,17 @@ def EditApachePortConf(logger, filePath):
     logger.info("End EditApachePortConf")
 def AddApacheVirtualServer(logger,filePath,destFilePath, lnFilePath):
     logger.info("Start AddApacheVirtualServer")
-    cmdStr = "rm " + destFilePath
+
+    cmdStr = "rm -rf" + destFilePath
     pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
+
     copy(filePath, destFilePath)
+
+    cmdStr = "rm -rf" + lnFilePath
+    pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
     cmdStr = "ln -s " + destFilePath + " " + lnFilePath
     pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
