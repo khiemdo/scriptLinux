@@ -37,6 +37,9 @@
     <Compile Include="lavernaInstall\lavernaInstall.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="phpmyadmin\Dockerfile">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="plexServer\plex">
       <SubType>Code</SubType>
     </Compile>
@@ -44,7 +47,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="scriptLinux.py" />
-    <Compile Include="phpmyadmin\phpmyadmin.conf">
+    <Compile Include="phpmyadmin\phpmyadmin">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="phpmyadmin\phpmyadminInstall.py">

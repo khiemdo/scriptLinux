@@ -167,13 +167,13 @@ if __name__ == "__main__":
     BashHelper.StripBlankLineFromScript(filePath)
     EditApachePortConf(logger,filePath)
 
-    pc = subprocess.Popen("cp /etc/apache2/sites-available/000-default.conf ./".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("cp /etc/apache2/sites-available/000-default.conf .".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    pc = subprocess.Popen("rm -rf /etc/apache2/sites-available/000-default.conf ./".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("rm -rf /etc/apache2/sites-available/000-default.conf".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    pc = subprocess.Popen("cp /etc/apache2/sites-enabled/default-ssl.conf ./".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("cp /etc/apache2/sites-enabled/default-ssl.conf .".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    pc = subprocess.Popen("rm -rf /etc/apache2/sites-enabled/default-ssl.conf ./".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("rm -rf /etc/apache2/sites-enabled/default-ssl.conf".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     AddApacheVirtualServer(logger,"./phpmyadmin","/etc/apache2/sites-available/phpmyadmin","/etc/apache2/sites-enabled/phpmyadmin")
