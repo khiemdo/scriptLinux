@@ -176,4 +176,4 @@ if __name__ == "__main__":
     pc = subprocess.Popen("rm -rf /etc/apache2/sites-enabled/*default* ./".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
-    AddApacheVirtualServer(logger,"./phpmyadmin.conf","/etc/apache2/sites-available/phpmyadmin.conf","/etc/apache2/sites-enabled/phpmyadmin.conf")
+    AddApacheVirtualServer(logger,"./phpmyadmin","/etc/apache2/sites-available/phpmyadmin","/etc/apache2/sites-enabled/phpmyadmin")
