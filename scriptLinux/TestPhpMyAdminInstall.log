@@ -1,0 +1,27 @@
+2016-08-29 01:19:29,914 - TestPhpMyAdminInstall - INFO - Start EditApachePortConf
+2016-08-29 01:19:53,062 - TestPhpMyAdminInstall - INFO - Start EditApachePortConf
+2016-08-29 01:20:25,259 - TestPhpMyAdminInstall - INFO - Start EditApachePortConf
+2016-08-29 01:21:00,315 - TestPhpMyAdminInstall - INFO - Start EditApachePortConf
+2016-08-29 01:24:50,798 - TestPhpMyAdminInstall - INFO - Start EditApachePortConf
+2016-08-29 01:25:11,334 - TestPhpMyAdminInstall - INFO - Found <IfModule ssl_module> at line 2: "<IfModule ssl_module>"
+2016-08-29 01:25:21,239 - TestPhpMyAdminInstall - INFO - Found </IfModule> at line 4: "</IfModule>"
+2016-08-29 01:25:31,436 - TestPhpMyAdminInstall - INFO - Found Listen 443 at line 3: "        Listen 443"-->"Listen 1443"
+2016-08-29 01:26:11,573 - TestPhpMyAdminInstall - INFO - Found </IfModule> at line 11: "</IfModule>"
+2016-08-29 01:26:26,818 - TestPhpMyAdminInstall - INFO - Found Listen 80 at line 1: "Listen 80"-->"Listen 1080"
+2016-08-29 01:27:22,188 - TestPhpMyAdminInstall - INFO - Start EditApachePortConf
+2016-08-29 01:27:22,209 - TestPhpMyAdminInstall - INFO - Found <IfModule ssl_module> at line 2: "<IfModule ssl_module>"
+2016-08-29 01:27:22,210 - TestPhpMyAdminInstall - INFO - Found </IfModule> at line 4: "</IfModule>"
+2016-08-29 01:27:22,210 - TestPhpMyAdminInstall - INFO - Found Listen 443 at line 3: "        Listen 443"-->"Listen 1443"
+2016-08-29 01:27:22,211 - TestPhpMyAdminInstall - INFO - Found </IfModule> at line 11: "</IfModule>"
+2016-08-29 01:27:22,213 - TestPhpMyAdminInstall - INFO - Found Listen 80 at line 1: "Listen 80"-->"Listen 1080"
+2016-08-29 01:27:26,072 - TestPhpMyAdminInstall - INFO - End EditApachePortConf
+2016-08-29 01:35:10,608 - TestPhpMyAdminInstall - INFO - Start EditApachePortConf
+2016-08-29 01:35:10,632 - TestPhpMyAdminInstall - INFO - Found <IfModule ssl_module> at line 2: "<IfModule ssl_module>"
+2016-08-29 01:35:10,634 - TestPhpMyAdminInstall - INFO - Found </IfModule> at line 4: "</IfModule>"
+2016-08-29 01:35:10,635 - TestPhpMyAdminInstall - INFO - Found </IfModule> at line 11: "</IfModule>"
+2016-08-29 01:35:14,733 - TestPhpMyAdminInstall - INFO - End EditApachePortConf
+2016-08-29 01:35:52,154 - TestPhpMyAdminInstall - INFO - Start EditApachePortConf
+2016-08-29 01:35:52,157 - TestPhpMyAdminInstall - INFO - Found <IfModule ssl_module> at line 2: "<IfModule ssl_module>"
+2016-08-29 01:35:52,161 - TestPhpMyAdminInstall - INFO - Found </IfModule> at line 4: "</IfModule>"
+2016-08-29 01:35:52,163 - TestPhpMyAdminInstall - INFO - Found </IfModule> at line 11: "</IfModule>"
+2016-08-29 01:36:01,671 - TestPhpMyAdminInstall - INFO - End EditApachePortConf

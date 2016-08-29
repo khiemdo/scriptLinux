@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import accessPointSetup
 from os import path
 import sys
