@@ -66,7 +66,7 @@ def EditApachePortConf(logger, filePath):
         lineNum += 1
         if(lineNum>lineIfStart and lineNum<lineIfEnd):
             needleStr = "Listen"
-            replacedStr = "Listen " + REPLACEMENT_OF_DEFAULT_SSL_PORT
+            replacedStr = "\tListen " + REPLACEMENT_OF_DEFAULT_SSL_PORT
             ret = line.find(needleStr)
             if(ret != -1):
                 logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))
@@ -98,7 +98,7 @@ def EditApachePortConf(logger, filePath):
         lineNum += 1
         if(lineNum>lineIfStart and lineNum<lineIfEnd):
             needleStr = "Listen"
-            replacedStr = "Listen " + REPLACEMENT_OF_DEFAULT_SSL_PORT
+            replacedStr = "\tListen " + REPLACEMENT_OF_DEFAULT_SSL_PORT
             ret = line.find(needleStr)
             if(ret != -1):
                 logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))
@@ -114,7 +114,7 @@ def EditApachePortConf(logger, filePath):
         lineNum += 1
         if(replaceFlag>0):
             needleStr = "Listen"
-            replacedStr = "Listen " + REPLACEMENT_OF_DEFAULT_SHTTP_PORT
+            replacedStr = "\tListen " + REPLACEMENT_OF_DEFAULT_SHTTP_PORT
             ret = line.find(needleStr)
             if(ret != -1):
                 logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))
@@ -167,13 +167,13 @@ if __name__ == "__main__":
     BashHelper.StripBlankLineFromScript(filePath)
     EditApachePortConf(logger,filePath)
 
-    pc = subprocess.Popen("cp /etc/apache2/sites-available/*default* ./".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("cp /etc/apache2/sites-available/000-default.conf ./".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    pc = subprocess.Popen("rm -rf /etc/apache2/sites-available/*default* ./".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("rm -rf /etc/apache2/sites-available/000-default.conf ./".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    pc = subprocess.Popen("cp /etc/apache2/sites-enabled/*default* ./".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("cp /etc/apache2/sites-enabled/default-ssl.conf ./".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    pc = subprocess.Popen("rm -rf /etc/apache2/sites-enabled/*default* ./".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("rm -rf /etc/apache2/sites-enabled/default-ssl.conf ./".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     AddApacheVirtualServer(logger,"./phpmyadmin","/etc/apache2/sites-available/phpmyadmin","/etc/apache2/sites-enabled/phpmyadmin")
