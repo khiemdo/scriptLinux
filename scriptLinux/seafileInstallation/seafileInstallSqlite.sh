@@ -6,7 +6,7 @@ set -e
 set -x
 #install dependencies
 apt-get update
-apt-get install git wget nano elinks 
+apt-get install -y git wget nano elinks 
 
 export VERSION_SEAFILE=seafile-server_5.1.4_stable_pi
 export SOURCE_SEAFILE=https://github.com/haiwen/seafile-rpi/releases/download

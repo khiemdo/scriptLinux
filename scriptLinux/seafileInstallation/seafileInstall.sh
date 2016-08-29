@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-apt-get install \
+apt-get install -y \
 	libevent-dev \
 	libcurl4-openssl-dev \
 	libglib2.0-dev \
