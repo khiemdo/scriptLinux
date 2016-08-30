@@ -37,6 +37,9 @@
     <Compile Include="lavernaInstall\lavernaInstall.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="owncloud\owncloud">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="phpmyadmin\Dockerfile">
       <SubType>Code</SubType>
     </Compile>
@@ -72,6 +75,7 @@
     <Folder Include="lavernaInstall\" />
     <Folder Include="gogsInstall\" />
     <Folder Include="dockerRapbian\" />
+    <Folder Include="owncloud\" />
     <Folder Include="phpmyadmin\" />
     <Folder Include="seafileInstallation\" />
     <Folder Include="plexServer\" />
@@ -120,6 +124,12 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="nginxFromSource\nginxFromSource.sh" />
+    <Content Include="owncloud\owncloud.sql">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="owncloud\owncloudInstall.sh">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="piSetup\10-network-device.rules" />
     <Content Include="piSetup\dhcpd.conf" />
     <Content Include="piSetup\interfaces" />
@@ -158,6 +168,12 @@
     <Content Include="seafileInstallation\seafile">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="seafileInstallation\seafile-client.service">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="seafileInstallation\seafile.service">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="seafileInstallation\seafileInstall.sh">
       <SubType>Code</SubType>
     </Content>
@@ -165,6 +181,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="seafileInstallation\seafileInstallMysql.sh">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="seafileInstallation\seahub.service">
       <SubType>Code</SubType>
     </Content>
     <Content Include="usbInterface\interfaces" />
