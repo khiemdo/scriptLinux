@@ -158,9 +158,6 @@ if __name__ == "__main__":
     logger = BashHelper.SetupLogger('phpmyadminnstall',"./phpmyadminnstall.log")
     RunPhpMyAdminInstallScript(logger)
 
-    pc = subprocess.Popen("rm /etc/apache2/sites-available/*default*".split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
-
     filePath=APACHE_PORT_CONFIG_FILE_PATH
     BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
     BashHelper.StripAllCommentsFromScript(filePath)
