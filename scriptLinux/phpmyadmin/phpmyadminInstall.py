@@ -158,9 +158,6 @@ if __name__ == "__main__":
     logger = BashHelper.SetupLogger('phpmyadminnstall',"./phpmyadminnstall.log")
     RunPhpMyAdminInstallScript(logger)
 
-    pc = subprocess.Popen("rm /etc/apache2/sites-available/*default*".split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
-
     filePath=APACHE_PORT_CONFIG_FILE_PATH
     BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
     BashHelper.StripAllCommentsFromScript(filePath)
@@ -169,9 +166,13 @@ if __name__ == "__main__":
 
     pc = subprocess.Popen("cp /etc/apache2/sites-available/000-default.conf .".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen("cp /etc/apache2/sites-available/default-ssl.conf .".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
     pc = subprocess.Popen("rm -rf /etc/apache2/sites-available/000-default.conf".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    pc = subprocess.Popen("cp /etc/apache2/sites-enabled/default-ssl.conf .".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("rm -rf /etc/apache2/sites-available/default-ssl.conf".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen("rm -rf /etc/apache2/sites-enabled/000-default.conf".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
     pc = subprocess.Popen("rm -rf /etc/apache2/sites-enabled/default-ssl.conf".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
