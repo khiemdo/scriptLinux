@@ -72,6 +72,7 @@
     <Folder Include="lavernaInstall\" />
     <Folder Include="gogsInstall\" />
     <Folder Include="dockerRapbian\" />
+    <Folder Include="owncloud\" />
     <Folder Include="phpmyadmin\" />
     <Folder Include="seafileInstallation\" />
     <Folder Include="plexServer\" />
@@ -120,6 +121,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="nginxFromSource\nginxFromSource.sh" />
+    <Content Include="owncloud\owncloud" />
+    <Content Include="owncloud\owncloud.sql" />
+    <Content Include="owncloud\owncloudInstall.sh" />
     <Content Include="piSetup\10-network-device.rules" />
     <Content Include="piSetup\dhcpd.conf" />
     <Content Include="piSetup\interfaces" />
@@ -156,9 +160,6 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="seafileInstallation\seafile">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="seafileInstallation\seafileInstall.sh">
       <SubType>Code</SubType>
     </Content>
     <Content Include="seafileInstallation\seafileInstallSqlite.sh">
