@@ -4,7 +4,8 @@ DBNAME=raspFnick2812
 DBUSER=pi
 DBPASSWD=root
 
-apt-get install -y debconf-utils
+apt-get update
+apt-get install -y debconf-utils apache2
 
 export DEBIAN_FRONTEND="noninteractive"
 echo -e "\n--- Install MySQL specific packages and settings ---\n" >> ./phpmyadminInstall.log 2>&1
