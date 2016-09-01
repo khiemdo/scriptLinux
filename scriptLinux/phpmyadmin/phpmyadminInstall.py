@@ -31,7 +31,7 @@ def InstallMySqlServerUsingPExpect(logger, password):
     child.sendline (password)
     child.expect ('Repeat password for the MySQL "root" user:')
     child.sendline (password)
-    child.wait()
+    child.expect(pexpect.EOF)
     logger.info("End InstallMySqlServerUsingPExpect")
 def InstallPhpMyAdminUsingPExpect(logger, mysqlPassword, password):
     logger.info("Start InstallPhpMyAdminUsingPExpect")
@@ -42,14 +42,18 @@ def InstallPhpMyAdminUsingPExpect(logger, mysqlPassword, password):
     child.sendline ('yes')
     child.expect ('Password of the database\'s administrative user:')
     child.sendline (mysqlPassword)
-    child.expect ('MySQL application password for phpmyadmin:')
-    child.sendline (password)
+    try:
+        child.expect ('MySQL application password for phpmyadmin:')
+        child.sendline (password)
+    except:
+        print "Exception was thrown"
+        print "debug information:"
+        print str(child)
     child.expect ('Password confirmation:')
     child.sendline (password)
     child.expect ('Web server to reconfigure automatically:')
     child.sendline ('apache2')
-    child.wait()
-    print(child.exitstatus, child.signalstatus)
+    child.expect(pexpect.EOF)
     logger.info("End InstallPhpMyAdminUsingPExpect")
 
 def EditApachePortConf(logger, filePath):
