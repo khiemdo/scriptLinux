@@ -33,7 +33,7 @@ def InstallMySqlServerUsingPExpect(logger, password):
     child.sendline (password)
     child.wait()
     logger.info("End InstallMySqlServerUsingPExpect")
-def InstallPhpMyAdminUsingPExpect(logger, password):
+def InstallPhpMyAdminUsingPExpect(logger, mysqlPassword, password):
     logger.info("Start InstallPhpMyAdminUsingPExpect")
     import pexpect
     child = pexpect.spawn('apt-get -y install phpmyadmin')
@@ -41,6 +41,8 @@ def InstallPhpMyAdminUsingPExpect(logger, password):
     child.expect ('Configure database for phpmyadmin with dbconfig-common?')
     child.sendline ('yes')
     child.expect ('Password of the database\'s administrative user:')
+    child.sendline (mysqlPassword)
+    child.expect ('MySQL application password for phpmyadmin:')
     child.sendline (password)
     child.expect ('Password confirmation:')
     child.sendline (password)
@@ -187,9 +189,12 @@ if __name__ == "__main__":
     InstallPip(logger)
     InstallPexpectPython(logger)
     InstallMySqlServerUsingPExpect(logger,ROOT_MYSQL_PASSWD)
+
     pc = subprocess.Popen("service mysql start".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    InstallPhpMyAdminUsingPExpect(logger,ROOT_MYSQL_PASSWD)
+
+    InstallPhpMyAdminUsingPExpect(logger,ROOT_MYSQL_PASSWD,ROOT_MYSQL_PASSWD)
+
     pc = subprocess.Popen("apt-get -y install mysql-client php5-mysql".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
     pc = subprocess.Popen("service mysql restart".split(),stdout = subprocess.PIPE)
