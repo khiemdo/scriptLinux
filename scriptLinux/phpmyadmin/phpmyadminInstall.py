@@ -12,16 +12,35 @@ import subprocess
 APACHE_PORT_CONFIG_FILE_PATH = "/etc/apache2/ports.conf"
 REPLACEMENT_OF_DEFAULT_SSL_PORT="1443"
 REPLACEMENT_OF_DEFAULT_SHTTP_PORT="1080"
+ROOT_MYSQL_PASSWD='root'
 
-def RunPhpMyAdminInstallScript(logger):
-    #installation here
-    logger.info("Run phpmyadminInstall.sh")
-    pc = subprocess.Popen("chown root:root ./phpmyadminInstall.sh".split(),stdout = subprocess.PIPE)
+def InstallPip(logger):
+    logger.info("Install InstallPip")
+    pc = subprocess.Popen("apt-get -y install python-pip".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    pc = subprocess.Popen("chmod 777 ./phpmyadminInstall.sh".split(),stdout = subprocess.PIPE)
+def InstallPexpectPython(logger):
+    logger.info("Install PexpectPython")
+    pc = subprocess.Popen("pip install pexpect".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-    pc = subprocess.Popen("/bin/bash ./phpmyadminInstall.sh".split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
+def InstallMySqlServerUsingPExpect(logger, password):
+    import pexpect
+    child = pexpect.spawn('apt-get -y install mysql-server')
+    child.expect ('New password for the MySQL "root" user:')
+    child.sendline (password)
+    child.expect ('Repeat password for the MySQL "root" user:')
+    child.sendline (password)
+def InstallPhpMyAdminUsingPExpect(logger, password):
+    import pexpect
+    child = pexpect.spawn('apt-get -y install phpmyadmin')
+    child.expect ('Configure database for phpmyadmin with dbconfig-common?')
+    child.sendline ('yes')
+    child.expect ('Password of the database\'s administrative user:')
+    child.sendline (password)
+    child.expect ('Password confirmation:')
+    child.sendline (password)
+    child.expect ('Web server to reconfigure automatically:')
+    child.sendline ('apache2')
+
 def EditApachePortConf(logger, filePath):
     logger.info("Start EditApachePortConf")
     originFhd = open(filePath,'r+')
@@ -156,7 +175,18 @@ def AddApacheVirtualServer(logger,filePath,destFilePath, lnFilePath):
 
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('phpmyadminnstall',"./phpmyadminnstall.log")
-    RunPhpMyAdminInstallScript(logger)
+    InstallPip(logger)
+    InstallPexpectPython(logger)
+    InstallMySqlServerUsingPExpect(logger,ROOT_MYSQL_PASSWD)
+    pc = subprocess.Popen("service mysql start".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    InstallPhpMyAdminUsingPExpect(logger,ROOT_MYSQL_PASSWD)
+    pc = subprocess.Popen("apt-get -y install mysql-client php5-mysql".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen("service mysql restart".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen("ln -s /usr/share/phpmyadmin/ /var/www/html/".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     filePath=APACHE_PORT_CONFIG_FILE_PATH
     BashHelper.BackupFileBfMod(filePath,SCRIPT_DIR,logger)
@@ -178,3 +208,5 @@ if __name__ == "__main__":
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     AddApacheVirtualServer(logger,"./phpmyadmin","/etc/apache2/sites-available/phpmyadmin","/etc/apache2/sites-enabled/phpmyadmin")
+    pc = subprocess.Popen("service apache2 start".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
