@@ -1,5 +1,3 @@
-create database owncloud;
-create user ownclouduser@localhost identified by 'password';
-grant all privileges on owncloud.* to ownclouduser@localhost identified by 'password';
+create database if not exists owncloud;
+grant all privileges on owncloud.* to ownclouduser@localhost identified by 'defaultPassword';
 flush privileges;
-exit;

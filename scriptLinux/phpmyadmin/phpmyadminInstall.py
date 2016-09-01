@@ -49,6 +49,7 @@ def InstallPhpMyAdminUsingPExpect(logger, mysqlPassword, password):
         print "Exception was thrown"
         print "debug information:"
         print str(child)
+
     child.expect ('Password confirmation:')
     child.sendline (password)
     child.expect ('Web server to reconfigure automatically:')

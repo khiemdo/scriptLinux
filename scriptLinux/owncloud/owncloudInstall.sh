@@ -11,8 +11,7 @@ apt-get install -y php5-fpm php5-mysql openssl ssl-cert php5-cli php5-common php
 apt-get install -y php5-fpm nginx
 
 #/home/seafile/haiwen/seafile-server-*
-adduser --disabled-login --gecos 'Gogs' seafile
-su - owncloud
+adduser --disabled-login --gecos 'owncloud' owncloud
 cd /home/owncloud
 
 wget -nv https://download.owncloud.org/download/repositories/stable/Debian_8.0/Release.key -O Release.key
@@ -22,7 +21,7 @@ sh -c "echo 'deb http://download.owncloud.org/download/repositories/stable/Debia
 apt-get update
 apt-get install -y owncloud-files
 
-apt-get install -y mysql-server
+service mysql start
 #//mysql script
 mysql -u root -p$MYSQL_PASSWORD < owncloud.sql
 #nginx config
