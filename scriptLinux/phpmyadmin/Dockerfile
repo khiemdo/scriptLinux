@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian
+FROM debian
 MAINTAINER  fnick2812@gmail.com
 
 RUN apt-get update
