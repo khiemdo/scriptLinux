@@ -15,7 +15,7 @@ REPLACEMENT_OF_DEFAULT_SHTTP_PORT="1080"
 ROOT_MYSQL_PASSWD='root'
 
 def InstallPip(logger):
-    logger.info("Install InstallPip")
+    logger.info("Install pip")
     pc = subprocess.Popen("apt-get -y install python-pip".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 def InstallPexpectPython(logger):
@@ -23,15 +23,21 @@ def InstallPexpectPython(logger):
     pc = subprocess.Popen("pip install pexpect".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 def InstallMySqlServerUsingPExpect(logger, password):
+    logger.info("Start InstallMySqlServerUsingPExpect")
     import pexpect
     child = pexpect.spawn('apt-get -y install mysql-server')
+    child.logfile = sys.stdout
     child.expect ('New password for the MySQL "root" user:')
     child.sendline (password)
     child.expect ('Repeat password for the MySQL "root" user:')
     child.sendline (password)
+    child.wait()
+    logger.info("End InstallMySqlServerUsingPExpect")
 def InstallPhpMyAdminUsingPExpect(logger, password):
+    logger.info("Start InstallPhpMyAdminUsingPExpect")
     import pexpect
     child = pexpect.spawn('apt-get -y install phpmyadmin')
+    child.logfile = sys.stdout
     child.expect ('Configure database for phpmyadmin with dbconfig-common?')
     child.sendline ('yes')
     child.expect ('Password of the database\'s administrative user:')
@@ -40,6 +46,9 @@ def InstallPhpMyAdminUsingPExpect(logger, password):
     child.sendline (password)
     child.expect ('Web server to reconfigure automatically:')
     child.sendline ('apache2')
+    child.wait()
+    print(child.exitstatus, child.signalstatus)
+    logger.info("End InstallPhpMyAdminUsingPExpect")
 
 def EditApachePortConf(logger, filePath):
     logger.info("Start EditApachePortConf")
