@@ -73,7 +73,7 @@ def GetOwncloudFiles(logger):
     logger.info('exe: apt-key add - < Release.key')
     pc = subprocess.Popen('apt-key add - < Release.key'.split(),stdout = subprocess.PIPE)
     logger.info('exe: echo \'deb http://download.owncloud.org/download/repositories/stable/Debian_8.0/ /\' >> /etc/apt/sources.list.d/owncloud.list')
-    pc = subprocess.Popen('echo \'deb http://download.owncloud.org/download/repositories/stable/Debian_8.0/ /\' >> /etc/apt/sources.list.d/owncloud.list'.split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("echo \'deb http://download.owncloud.org/download/repositories/stable/Debian_8.0/ /\' >> /etc/apt/sources.list.d/owncloud.list".split(),stdout = subprocess.PIPE)
     pc = subprocess.Popen('apt-get update'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
     pc = subprocess.Popen('apt-get install -y owncloud-files'.split(),stdout = subprocess.PIPE)
@@ -157,7 +157,7 @@ if __name__ == "__main__":
     remove('/etc/nginx/sites-available/default')
     remove('/etc/nginx/sites-enabled/default')
     AddNginxVirtualServer(logger,"./owncloud","/etc/nginx/sites-available/owncloud","/etc/nginx/sites-enabled/owncloud")
-    EditPph5_FpmConfig(logger,'/etc/php5/fpm/pool.d')
+    EditPph5_FpmConfig(logger,'/etc/php5/fpm/pool.d/www.conf')
 
     pc = subprocess.Popen("service mysql restart".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
