@@ -6,9 +6,6 @@ set -e
 set -x
 #install dependencies
 apt-get update
-apt-get install -y git wget nano elinks nginx
-apt-get install -y php5-fpm php5-mysql openssl ssl-cert php5-cli php5-common php5-cgi php-pear php-apc curl libapr1 libtool php5-curl libcurl4-openssl-dev php-xml-parser php5-dev php5-gd libmemcached* memcached php5-memcached
-apt-get install -y php5-fpm nginx
 
 #/home/seafile/haiwen/seafile-server-*
 adduser --disabled-login --gecos 'owncloud' owncloud

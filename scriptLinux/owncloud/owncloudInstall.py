@@ -11,6 +11,7 @@ import subprocess
 
 MYSQL_PASSWORD='root'
 
+
 def InstallMySQLPython(logger):
     logger.info("Install PexpectPython")
     pc = subprocess.Popen("pip install MySQL-python".split(),stdout = subprocess.PIPE)
@@ -54,6 +55,12 @@ def RunOwncloudSQL(logger, database,sqlScriptPath):
         cursor.execute(line)
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('owncloudInstall',"./owncloudInstall.log")
+
+    pc = subprocess.Popen("apt-get install -y git wget nano elinks nginx".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen("apt-get install -y php5-fpm php5-mysql openssl ssl-cert php5-cli php5-common php5-cgi php-pear php-apc curl libapr1 libtool php5-curl libcurl4-openssl-dev php-xml-parser php5-dev php5-gd libmemcached* memcached php5-memcached".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
     GenerateOpenSSLPExpect(logger,'sg','singapore','singapore','fnick2812','fnick2812','fnick2812','fnick2812@local.com','owncloud.key','owncloud.crt')
     pc = subprocess.Popen("mkdir -p /etc/nginx/ssl".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
