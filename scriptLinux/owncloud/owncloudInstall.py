@@ -78,6 +78,9 @@ def GetOwncloudFiles(logger):
     BashHelper.CheckOutputOfCallingBash(pc,logger)
     pc = subprocess.Popen('apt-get install -y owncloud-files'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen('chown -R www-data:www-data /var/www'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
 def AddNginxVirtualServer(logger,filePath,destFilePath, lnFilePath):
     logger.info("Start AddNginxVirtualServer")
 
@@ -121,6 +124,8 @@ if __name__ == "__main__":
 
     RunOwncloudSQL(logger,db,"owncloud.sql", 'root')
     GetOwncloudFiles(logger)
+    remove('/etc/nginx/sites-available/default')
+    remove('/etc/nginx/sites-enabled/default')
     AddNginxVirtualServer(logger,"./owncloud","/etc/nginx/sites-available/owncloud","/etc/nginx/sites-enabled/owncloud")
 
     pc = subprocess.Popen("service mysql restart".split(),stdout = subprocess.PIPE)
