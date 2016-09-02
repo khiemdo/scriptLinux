@@ -22,19 +22,21 @@ def GenerateOpenSSLPExpect(logger, country, state,city,organization,orgUnit,name
     logger.info('exec: openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout '+ nameKey+ ' -out ' + nameCrt)
     child = pexpect.spawn('openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout '+ nameKey+ ' -out ' + nameCrt)
     child.logfile = sys.stdout
-    child.expect ('Country Name (2 letter code) [AU]:')
+
+    child.expect ('Country Name .*')
     child.sendline (country)
-    child.expect ('State or Province Name (full name) [Some-State]:')
+
+    child.expect ('State or Province Name .*')
     child.sendline (state)
-    child.expect ('Locality Name (eg, city) []:')
+    child.expect ('Locality Name .*')
     child.sendline (city)
-    child.expect ('Organization Name (eg, company) [Internet Widgits Pty Ltd]:')
+    child.expect ('Organization Name .*')
     child.sendline (organization)
-    child.expect ('Organizational Unit Name (eg, section) []:')
+    child.expect ('Organizational Unit Name .*')
     child.sendline (orgUnit)
-    child.expect ('Common Name (e.g. server FQDN or YOUR name) []:')
+    child.expect ('Common Name .*')
     child.sendline (name)
-    child.expect ('Email Address []:')
+    child.expect ('Email Address .*')
     child.sendline (email)
 
     child.expect(pexpect.EOF)
