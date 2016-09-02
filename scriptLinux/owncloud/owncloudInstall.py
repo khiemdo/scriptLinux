@@ -53,11 +53,18 @@ def RunBashScript(logger, scriptPath):
     logger.info("exe: "+scriptPath)
     pc = subprocess.Popen(scriptPath.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-def RunOwncloudSQL(logger, database,sqlScriptName):
+def RunOwncloudSQL(logger, database,sqlScriptName, owncloudDbPasswd):
     filePath = path.join(SCRIPT_DIR, sqlScriptName) 
     cursor = database.cursor()
-    for line in open(filePath):
+    mysqlScript = ""
+    for line in open(filePath):    
+        mysqlScript+=line
+    mysqlScript.replace('defaultPassword',owncloudDbPasswd)
+
+    for line in mysqlScript.splitlines():
+        logger.info("sqlExe: "+line)
         cursor.execute(line)
+
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('owncloudInstall',"./owncloudInstall.log")
     InstallMySQLPython(logger)
@@ -72,10 +79,13 @@ if __name__ == "__main__":
     copy('owncloud.key','/etc/nginx/ssl/owncloud.key')
     copy('owncloud.crt','/etc/nginx/ssl/owncloud.crt')
 
+    pc = subprocess.Popen("service mysql restart".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
     import MySQLdb
     db = MySQLdb.connect(host="localhost",user="root",passwd="root")
 
-    RunOwncloudSQL(logger,db,"owncloud.sql")
+    RunOwncloudSQL(logger,db,"owncloud.sql", 'root')
     RunBashScript(logger,"./owncloudInstall.sh")
 
     pc = subprocess.Popen("service mysql restart".split(),stdout = subprocess.PIPE)
