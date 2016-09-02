@@ -37,6 +37,9 @@
     <Compile Include="lavernaInstall\lavernaInstall.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="owncloud\owncloudInstall.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="phpmyadmin\Dockerfile">
       <SubType>Code</SubType>
     </Compile>
