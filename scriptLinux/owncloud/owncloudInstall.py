@@ -14,6 +14,8 @@ MYSQL_PASSWORD='root'
 
 def InstallMySQLPython(logger):
     logger.info("Install PexpectPython")
+    pc = subprocess.Popen("apt-get install python-mysqldb".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
     pc = subprocess.Popen("pip install MySQL-python".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 def GenerateOpenSSLPExpect(logger, country, state,city,organization,orgUnit,name,email, nameKey, nameCrt):
@@ -69,6 +71,7 @@ if __name__ == "__main__":
     copy('owncloud.key','/etc/nginx/ssl/owncloud.key')
     copy('owncloud.crt','/etc/nginx/ssl/owncloud.crt')
 
+    import MySQLdb
     db = MySQLdb.connect(host="localhost",user="root",passwd="root")
 
     RunOwncloudSQL(logger,db,"owncloud.sql")
