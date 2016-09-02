@@ -44,6 +44,7 @@ def GenerateOpenSSLPExpect(logger, country, state,city,organization,orgUnit,name
     child.expect(pexpect.EOF)
     logger.info("End GenerateOpenSSLPExpect")
 def RunBashScript(logger, scriptPath):
+    logger.info("Start RunBashScript")
     logger.info("chown root "+scriptPath)
     pc = subprocess.Popen(("chown root "+scriptPath).split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger) 
@@ -54,6 +55,7 @@ def RunBashScript(logger, scriptPath):
     pc = subprocess.Popen(scriptPath.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 def RunOwncloudSQL(logger, database,sqlScriptName, owncloudDbPasswd):
+    logger.info("Start RunOwncloudSQL")
     filePath = path.join(SCRIPT_DIR, sqlScriptName) 
     cursor = database.cursor()
     mysqlScript = ""
@@ -64,7 +66,39 @@ def RunOwncloudSQL(logger, database,sqlScriptName, owncloudDbPasswd):
     for line in mysqlScript.splitlines():
         logger.info("sqlExe: "+line)
         cursor.execute(line)
+def GetOwncloudFiles(logger):
+    logger.info("Start GetOwncloudFiles")
+    pc = subprocess.Popen('wget -nv https://download.owncloud.org/download/repositories/stable/Debian_8.0/Release.key -O Release.key'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen('apt-key add - < Release.key'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen('echo \'deb http://download.owncloud.org/download/repositories/stable/Debian_8.0/ /\' >> /etc/apt/sources.list.d/owncloud.list'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen('apt-get update'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    pc = subprocess.Popen('apt-get install -y owncloud-files'.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+def AddNginxVirtualServer(logger,filePath,destFilePath, lnFilePath):
+    logger.info("Start AddNginxVirtualServer")
 
+    cmdStr = "rm -rf " + destFilePath
+    logger.info("exec {}".format(cmdStr))
+    pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
+    copy(filePath, destFilePath)
+
+    cmdStr = "rm -rf " + lnFilePath
+    logger.info("exec {}".format(cmdStr))
+    pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+
+    cmdStr = "ln -s " + destFilePath + " " + lnFilePath
+    logger.info("exec {}".format(cmdStr))
+    pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    logger.info("End AddApacheVirtualServer")
+    
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('owncloudInstall',"./owncloudInstall.log")
     InstallMySQLPython(logger)
@@ -86,7 +120,8 @@ if __name__ == "__main__":
     db = MySQLdb.connect(host="localhost",user="root",passwd="root")
 
     RunOwncloudSQL(logger,db,"owncloud.sql", 'root')
-    RunBashScript(logger,"./owncloudInstall.sh")
+    GetOwncloudFiles(logger)
+    AddNginxVirtualServer(logger,"./owncloud","/etc/nginx/sites-available/owncloud","/etc/nginx/sites-enabled/owncloud")
 
     pc = subprocess.Popen("service mysql restart".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
