@@ -22,12 +22,8 @@ apt-get update
 apt-get install -y owncloud-files
 
 service mysql start
-#//mysql script
+#mysql script
 mysql -u root -p$MYSQL_PASSWORD < owncloud.sql
 #nginx config
 cp owncloud /etc/nginx/sites-available
 ln -s /etc/nginx/sites-available/owncloud /etc/nginx/sites-enabled/owncloud
-
-service mysql restart
-service php5-fpm restart
-service nginx restart
