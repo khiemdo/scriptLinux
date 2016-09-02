@@ -53,9 +53,10 @@ def RunBashScript(logger, scriptPath):
     logger.info("exe: "+scriptPath)
     pc = subprocess.Popen(scriptPath.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
-def RunOwncloudSQL(logger, database,sqlScriptPath):
+def RunOwncloudSQL(logger, database,sqlScriptName):
+    filePath = path.join(SCRIPT_DIR, sqlScriptName) 
     cursor = database.cursor()
-    for line in open(sqlFilePath):
+    for line in open(filePath):
         cursor.execute(line)
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('owncloudInstall',"./owncloudInstall.log")
