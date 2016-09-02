@@ -101,7 +101,37 @@ def AddNginxVirtualServer(logger,filePath,destFilePath, lnFilePath):
     pc = subprocess.Popen(cmdStr.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
     logger.info("End AddApacheVirtualServer")
-    
+def EditPph5_FpmConfig(logger,filePath):
+    logger.info("Start EditPph5_FpmConfig")
+    originFhd = open(filePath,'r+')
+
+    tmpFileName = filePath+BashHelper.GenerateRandomCharSets(5)
+    tempAbsPath = path.join(SCRIPT_DIR, tmpFileName) 
+    try:
+        ret = remove(tempAbsPath)  
+    except OSError as err:
+        pass  
+    tempFhd = open(tempAbsPath,'w+')
+    tempConfigStr = ""
+    needleStr = ""
+    replacedStr = ""
+    lineNum = 0
+    for line in originFhd:
+        lineNum += 1
+        needleStr = 'listen ='
+        replacedStr = 'listen = 127.0.0.1:9000'
+        ret = line.find(needleStr)
+        if(ret == 0):
+            logger.info("Found {} at line {}: \"{}\"-->\"{}\"".format(needleStr.strip(),lineNum,line.rstrip(),replacedStr.rstrip()))
+            line = line.replace(line,replacedStr)
+        tempFhd.write(line)   
+ 
+    originFhd.close()
+    tempFhd.close()
+    ret = remove(filePath)
+    move(tempAbsPath,filePath)
+    logger.info("End EditPph5_FpmConfig")
+
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('owncloudInstall',"./owncloudInstall.log")
     InstallMySQLPython(logger)
@@ -127,6 +157,7 @@ if __name__ == "__main__":
     remove('/etc/nginx/sites-available/default')
     remove('/etc/nginx/sites-enabled/default')
     AddNginxVirtualServer(logger,"./owncloud","/etc/nginx/sites-available/owncloud","/etc/nginx/sites-enabled/owncloud")
+    EditPph5_FpmConfig(logger,'/etc/php5/fpm/pool.d')
 
     pc = subprocess.Popen("service mysql restart".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
