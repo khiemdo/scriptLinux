@@ -153,6 +153,8 @@ if __name__ == "__main__":
     db = MySQLdb.connect(host="localhost",user="root",passwd="root")
 
     RunOwncloudSQL(logger,db,"owncloud.sql", 'root')
+    db.close()
+
     GetOwncloudFiles(logger)
     remove('/etc/nginx/sites-available/default')
     remove('/etc/nginx/sites-enabled/default')
