@@ -68,10 +68,12 @@ def RunOwncloudSQL(logger, database,sqlScriptName, owncloudDbPasswd):
         cursor.execute(line)
 def GetOwncloudFiles(logger):
     logger.info("Start GetOwncloudFiles")
+    logger.info('exe: wget -nv https://download.owncloud.org/download/repositories/stable/Debian_8.0/Release.key -O Release.key')
     pc = subprocess.Popen('wget -nv https://download.owncloud.org/download/repositories/stable/Debian_8.0/Release.key -O Release.key'.split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
+    logger.info('exe: apt-key add - < Release.key')
     pc = subprocess.Popen('apt-key add - < Release.key'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
+    logger.info('exe: echo \'deb http://download.owncloud.org/download/repositories/stable/Debian_8.0/ /\' >> /etc/apt/sources.list.d/owncloud.list')
     pc = subprocess.Popen('echo \'deb http://download.owncloud.org/download/repositories/stable/Debian_8.0/ /\' >> /etc/apt/sources.list.d/owncloud.list'.split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
     pc = subprocess.Popen('apt-get update'.split(),stdout = subprocess.PIPE)
