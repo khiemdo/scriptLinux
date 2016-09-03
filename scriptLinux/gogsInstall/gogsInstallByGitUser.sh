@@ -16,14 +16,15 @@ echo "extract $VERSION_GOLANG.tar.gz"
 tar -C /home/git/local -xzf $VERSION_GOLANG.tar.gz 
 
 cd /home/git/
-echo 'export GOROOT=$HOME/local/go' >> $HOME/.bashrc
-echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc
-echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> $HOME/.bashrc
-echo 'source $HOME/.bashrc'
-source $HOME/.bashrc
+echo 'export GOROOT=/home/git/local/go' >> /home/git/.bashrc
+echo 'export GOPATH=/home/git/go' >> /home/git/.bashrc
+echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> /home/git/.bashrc
+echo 'source /home/git/.bashrc'
+source /home/git/.bashrc
 
+whoami
 echo 'go get -u github.com/gogits/gogs'
-go get -u github.com/gogits/gogs
+/home/git/go/bin/go get -u github.com/gogits/gogs
 cd $GOPATH/src/github.com/gogits/gogs
 echo 'go build'
-go build
+/home/git/go/bin/go build

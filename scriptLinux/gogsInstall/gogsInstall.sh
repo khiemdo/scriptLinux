@@ -14,16 +14,19 @@ SQL_SCRIPT_FILE='gogs.sql'
 service mysql start
 mysql -u root -p$ROOT_MYSQL_PASSWD < $SQL_SCRIPT_FILE
 
-if !id "git" >/dev/null 2>&1;
-then
+getent passwd 'git' > /dev/null 2&>1
+ret=$?;
+
+if [[ $ret -ne 0 ]]; then
 	echo 'git user does not exist. create git user'
 	adduser --disabled-login --gecos 'Gogs' git
 fi
+
 chown git gogsInstallByGitUser.sh
 chmod +x gogsInstallByGitUser.sh
 su git -c '/bin/bash ./gogsInstallByGitUser.sh'
  
-
+chmod -x gogs.service
 cp gogs.service /lib/systemd/system
 systemctl enable gogs.service
 systemctl start gogs.service
