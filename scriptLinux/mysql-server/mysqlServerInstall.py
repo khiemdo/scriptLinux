@@ -24,9 +24,9 @@ def InstallMySqlServerUsingPExpect(logger, password):
     child = pexpect.spawn('apt-get -y install mysql-server')
     child.logfile = sys.stdout
     child.expect ('New password for the MySQL "root" user:')
-    child.sendline (password)
+    child.sendline (password+'\r')
     child.expect ('Repeat password for the MySQL "root" user:')
-    child.sendline (password)
+    child.sendline (password+'\r')
     child.expect(pexpect.EOF)
     logger.info("End InstallMySqlServerUsingPExpect")
 
