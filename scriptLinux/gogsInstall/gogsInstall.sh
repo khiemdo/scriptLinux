@@ -19,12 +19,11 @@ then
 	echo 'git user does not exist. create git user'
 	adduser --disabled-login --gecos 'Gogs' git
 fi
-chown git gogInstallByGitUser.sh
-chmod +x gogInstallByGitUser.sh
-su git -c '/bin/bash ./gogInstallByGitUser.sh'
+chown git gogsInstallByGitUser.sh
+chmod +x gogsInstallByGitUser.sh
+su git -c '/bin/bash ./gogsInstallByGitUser.sh'
+ 
 
 cp gogs.service /lib/systemd/system
 systemctl enable gogs.service
 systemctl start gogs.service
-
-exit

@@ -18,7 +18,7 @@ Type=simple
 User=git
 Group=git
 WorkingDirectory=/home/git/gogs
-ExecStart=/home/git/gogs/gogs web
+ExecStart=/home/git/go/src/github.com/gogits/gogs/gogs web
 Restart=always
 Environment=USER=git HOME=/home/git
 
