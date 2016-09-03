@@ -146,7 +146,7 @@ if __name__ == "__main__":
     copy('owncloud.key','/etc/nginx/ssl/owncloud.key')
     copy('owncloud.crt','/etc/nginx/ssl/owncloud.crt')
 
-    pc = subprocess.Popen("service mysql restart".split(),stdout = subprocess.PIPE)
+    pc = subprocess.Popen("service mysql start".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 
     import MySQLdb

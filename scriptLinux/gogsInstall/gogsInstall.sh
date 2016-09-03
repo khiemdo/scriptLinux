@@ -25,7 +25,7 @@ source $HOME/.bashrc
 
 go get -u github.com/gogits/gogs
 cd $GOPATH/src/github.com/gogits/gogs
-go build
+go build -tags "sqlite tidb pam cert"
 cd $GOPATH/src/github.com/gogits/gogs
 
 exit
