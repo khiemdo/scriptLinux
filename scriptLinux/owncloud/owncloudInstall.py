@@ -61,7 +61,7 @@ def RunOwncloudSQL(logger, database,sqlScriptName, owncloudDbPasswd):
     mysqlScript = ""
     for line in open(filePath):    
         mysqlScript+=line
-    mysqlScript.replace('defaultPassword',owncloudDbPasswd)
+    mysqlScript=mysqlScript.replace('defaultPassword',owncloudDbPasswd)
 
     for line in mysqlScript.splitlines():
         logger.info("sqlExe: "+line)

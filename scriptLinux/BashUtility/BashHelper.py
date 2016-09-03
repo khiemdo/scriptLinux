@@ -82,3 +82,10 @@ def StripBlankLineFromScript(filePath):
     tempFhd.close()
     ret = remove(filePath)
     move(tmpFileName,filePath) 
+
+def RunSQLScript(logger,database,sqlScriptName):
+    logger.info("Start "+sqlScriptName+" SQLScript")
+    cursor = database.cursor()
+    for line in open(filePath):
+        logger.info("sqlExe: "+line)
+        cursor.execute(line)

@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
-
+#dependency: 
+#	mysql-server
 BASE_FOLDER=$1
 #stop and exit on first error
 set -e 
 #install dependencies
 apt-get update
-apt-get install git wget nano elinks 
+apt-get install git wget nano  
+
+ROOT_MYSQL_PASSWD='root'
+SQL_SCRIPT_FILE='gogs.sql'
+mysql -u root -p$ROOT_MYSQL_PASSWD < $SQL_SCRIPT_FILE
 
 adduser --disabled-login --gecos 'Gogs' git
 su - git
@@ -25,7 +30,9 @@ source $HOME/.bashrc
 
 go get -u github.com/gogits/gogs
 cd $GOPATH/src/github.com/gogits/gogs
-go build -tags "sqlite tidb pam cert"
-cd $GOPATH/src/github.com/gogits/gogs
+go build
+cd $GOPATH/src/github.com/gogits/gogs/scripts/systemd/gogs.service /lib/systemd/system
+systemctl enable gogs.service
+systemctl start gogs.service
 
 exit

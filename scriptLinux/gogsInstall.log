@@ -1,0 +1,35 @@
+2016-09-03 21:38:59,703 - gogsInstall - INFO - DROP DATABASE IF EXISTS gogs;
+CREATE DATABASE IF NOT EXISTS gogs CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+DROP DATABASE IF EXISTS owncloud;
+CREATE DATABASE IF NOT EXISTS owncloud;
+grant all privileges on owncloud.* to ownclouduser@localhost identified by 'defaultPassword';
+flush privileges;
+2016-09-03 21:39:45,078 - gogsInstall - INFO - DROP DATABASE IF EXISTS gogs;
+CREATE DATABASE IF NOT EXISTS gogs CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+DROP DATABASE IF EXISTS owncloud;
+CREATE DATABASE IF NOT EXISTS owncloud;
+grant all privileges on owncloud.* to ownclouduser@localhost identified by 'defaultPassword';
+flush privileges;
+2016-09-03 21:41:12,431 - gogsInstall - INFO - DROP DATABASE IF EXISTS gogs;
+CREATE DATABASE IF NOT EXISTS gogs CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+DROP DATABASE IF EXISTS owncloud;
+CREATE DATABASE IF NOT EXISTS owncloud;
+grant all privileges on owncloud.* to ownclouduser@localhost identified by 'defaultPassword';
+flush privileges;
+2016-09-03 21:41:52,016 - gogsInstall - INFO - DROP root IF EXISTS gogs;
+CREATE root IF NOT EXISTS gogs CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+DROP root IF EXISTS owncloud;
+CREATE root IF NOT EXISTS owncloud;
+grant all privileges on owncloud.* to ownclouduser@localhost identified by 'defaultPassword';
+flush privileges;
+2016-09-03 21:42:05,694 - gogsInstall - INFO - DROP DATABASE IF EXISTS gogs;
+CREATE DATABASE IF NOT EXISTS gogs CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+DROP DATABASE IF EXISTS owncloud;
+CREATE DATABASE IF NOT EXISTS owncloud;
+grant all privileges on owncloud.* to ownclouduser@localhost identified by 'root';
+flush privileges;
