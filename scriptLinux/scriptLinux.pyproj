@@ -38,6 +38,12 @@
     <Compile Include="cloudCoding\codiad">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="codiad\codiad">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="codiad\codiadSSL">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="lavernaInstall\lavernaInstall.py">
       <SubType>Code</SubType>
     </Compile>
@@ -121,6 +127,15 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="codiad\codiadInstall.sh">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codiad\config.php">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codiad\php-fpm.conf">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="codiad\www.conf">
       <SubType>Code</SubType>
     </Content>
     <Content Include="dockerRapbian\dockerInstall.sh">
