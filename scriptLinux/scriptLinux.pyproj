@@ -5,7 +5,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>b0d8fc5b-4315-4204-938f-6560b0905d10</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>gogsInstall\gogsInstall.py</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -34,7 +35,7 @@
     <Compile Include="BashUtility\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="gogsInstall\gogsInstall.py">
+    <Compile Include="cloudCoding\codiad">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="lavernaInstall\lavernaInstall.py">
@@ -83,6 +84,7 @@
     <Folder Include="dockerRapbian\" />
     <Folder Include="cloudCoding\" />
     <Folder Include="mysql-server\" />
+    <Folder Include="codiad\" />
     <Folder Include="owncloud\" />
     <Folder Include="phpmyadmin\" />
     <Folder Include="seafileInstallation\" />
@@ -118,7 +120,13 @@
     <Content Include="cloudCoding\codeInstall.sh">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codiad\codiadInstall.sh">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="dockerRapbian\dockerInstall.sh">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="gogsInstall\gogsInstallByGitUser.sh">
       <SubType>Code</SubType>
     </Content>
     <Content Include="gogsInstall\gogs.service">
