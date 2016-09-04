@@ -14,25 +14,6 @@ REPLACEMENT_OF_DEFAULT_SSL_PORT="1443"
 REPLACEMENT_OF_DEFAULT_SHTTP_PORT="1080"
 ROOT_MYSQL_PASSWD='root'
 
-def InstallPip(logger):
-    logger.info("Install pip")
-    pc = subprocess.Popen("apt-get -y install python-pip".split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
-def InstallPexpectPython(logger):
-    logger.info("Install PexpectPython")
-    pc = subprocess.Popen("pip install pexpect".split(),stdout = subprocess.PIPE)
-    BashHelper.CheckOutputOfCallingBash(pc,logger)
-def InstallMySqlServerUsingPExpect(logger, password):
-    logger.info("Start InstallMySqlServerUsingPExpect")
-    import pexpect
-    child = pexpect.spawn('apt-get -y install mysql-server')
-    child.logfile = sys.stdout
-    child.expect ('New password for the MySQL "root" user:')
-    child.sendline (password)
-    child.expect ('Repeat password for the MySQL "root" user:')
-    child.sendline (password)
-    child.expect(pexpect.EOF)
-    logger.info("End InstallMySqlServerUsingPExpect")
 def InstallPhpMyAdminUsingPExpect(logger, mysqlPassword, password):
     logger.info("Start InstallPhpMyAdminUsingPExpect")
     import pexpect
@@ -191,9 +172,6 @@ def AddApacheVirtualServer(logger,filePath,destFilePath, lnFilePath):
 
 if __name__ == "__main__":
     logger = BashHelper.SetupLogger('phpmyadminnstall',"./phpmyadminnstall.log")
-    InstallPip(logger)
-    InstallPexpectPython(logger)
-    InstallMySqlServerUsingPExpect(logger,ROOT_MYSQL_PASSWD)
 
     pc = subprocess.Popen("service mysql start".split(),stdout = subprocess.PIPE)
     BashHelper.CheckOutputOfCallingBash(pc,logger)

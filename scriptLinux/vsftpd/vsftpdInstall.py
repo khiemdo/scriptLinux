@@ -31,12 +31,17 @@ def EditVsftpdConfig(logger,filePath):
     logger.info("Start editting vsftpd config")
     originFhd = open(filePath,'r+')
     #tempFile, tempAbsPath = mkstemp()
+    tmpFileName = filePath+BashHelper.GenerateRandomCharSets(5)
+    tempAbsPath = path.join(script_dir, tmpFileName) 
+    try:
+        ret = remove(tempAbsPath)  
+    except OSError as err:
+        pass  
 
-    tempAbsPath = path.join(script_dir, "tmpVsftpd") 
     tempFhd = open(tempAbsPath,'w+')
     lineNum = 0
     needleStr = ""
-    replacedStr = ""#todo
+    replacedStr = ""
 
     force_dot_files_Flag = 0
 

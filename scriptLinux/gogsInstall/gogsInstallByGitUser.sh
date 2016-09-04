@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 cd /home/git
 mkdir -p local
 mkdir -p gogs
@@ -22,9 +24,12 @@ echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> /home/git/.bashrc
 echo 'source /home/git/.bashrc'
 source /home/git/.bashrc
 
-whoami
+export GOROOT=/home/git/local/go
+export GOPATH=/home/git/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
 echo 'go get -u github.com/gogits/gogs'
-/home/git/go/bin/go get -u github.com/gogits/gogs
+go get -u github.com/gogits/gogs
 cd $GOPATH/src/github.com/gogits/gogs
 echo 'go build'
-/home/git/go/bin/go build
+go build

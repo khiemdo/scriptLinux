@@ -11,3 +11,4 @@ pip install pexpect
 pip install MySQL-python
 
 ./mysqlServerInstall.py#todo
+./gogsInstall.sh
