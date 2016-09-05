@@ -9,7 +9,6 @@ sys.path.append(path.join(SCRIPT_DIR,'..'))
 from BashUtility import BashHelper
 
 from shutil import move, copy
-
 import subprocess
 ROOT_MYSQL_PASSWD='root'
 
