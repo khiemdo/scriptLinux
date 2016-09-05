@@ -1,12 +1,15 @@
 #!/usr/bin/python
 from os import path
+from os import environ
+from os import remove
+
 import sys
 SCRIPT_DIR = path.dirname(__file__)
 sys.path.append(path.join(SCRIPT_DIR,'..'))
 from BashUtility import BashHelper
 
 from shutil import move, copy
-from os import remove
+
 import subprocess
 ROOT_MYSQL_PASSWD='root'
 
@@ -20,7 +23,7 @@ def InstallPexpectPython(logger):
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 def InstallMySqlServerUsingPExpect(logger, password):
     logger.info("Start InstallMySqlServerUsingPExpect")
-    os.environ["DEBIAN_FRONTEND"] = "readline"
+    environ["DEBIAN_FRONTEND"] = "readline"
     import pexpect
     child = pexpect.spawn('apt-get -y -q install mysql-server')
     child.logfile = sys.stdout
