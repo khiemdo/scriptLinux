@@ -23,10 +23,16 @@ def InstallMySqlServerUsingPExpect(logger, password):
     import pexpect
     child = pexpect.spawn('apt-get -y -q install mysql-server')
     child.logfile = sys.stdout
-    child.expect ('New password for the MySQL "root" user:')
-    child.sendline (password)
-    child.expect ('Repeat password for the MySQL "root" user:')
-    child.sendline (password)
+    try:
+        i = child.expect ('New password for the MySQL "root" user:')
+        child.sendline (password)
+        i = child.expect ('Repeat password for the MySQL "root" user:')
+        child.sendline (password)
+    except:
+        print("Pexpect Exception was thrown")
+        print("debug information:")
+        print(str(child))
+
     child.expect(pexpect.EOF)
     logger.info("End InstallMySqlServerUsingPExpect")
 
