@@ -20,6 +20,8 @@ def InstallPexpectPython(logger):
     BashHelper.CheckOutputOfCallingBash(pc,logger)
 def InstallMySqlServerUsingPExpect(logger, password):
     logger.info("Start InstallMySqlServerUsingPExpect")
+    pc = subprocess.Popen("export DEBIAN_FRONTEND=\"noninteractive\"".split(),stdout = subprocess.PIPE)
+    BashHelper.CheckOutputOfCallingBash(pc,logger)
     import pexpect
     child = pexpect.spawn('apt-get -y install mysql-server')
     child.logfile = sys.stdout
@@ -35,3 +37,4 @@ if __name__ == "__main__":
     InstallPip(logger)
     InstallPexpectPython(logger)
     InstallMySqlServerUsingPExpect(logger,ROOT_MYSQL_PASSWD)
+
