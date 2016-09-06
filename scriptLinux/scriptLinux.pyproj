@@ -44,6 +44,9 @@
     <Compile Include="codiad\codiadSSL">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="gogsInstall\gogs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="lavernaInstall\lavernaInstall.py">
       <SubType>Code</SubType>
     </Compile>
@@ -136,6 +139,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="codiad\www.conf">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="dockerRapbian\dockerDebianADM.sh">
       <SubType>Code</SubType>
     </Content>
     <Content Include="dockerRapbian\dockerInstall.sh">

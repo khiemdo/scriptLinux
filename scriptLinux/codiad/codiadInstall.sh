@@ -22,13 +22,11 @@ chmod go+w /var/www/codiad/config.php /var/www/codiad/workspace /var/www/codiad/
 usermod -G git www-data
 usermod -G www-data git
 
-#generate codiad.pem key
 echo 'Generate codiad openssl key'
 mkdir /etc/nginx/ssl
 cd /etc/nginx/ssl
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout codiad.key -out codiad.crt -subj "/C=SG/ST=Singapore/L=Singapore/O=fnick2812/OU=fnick2812/CN=fnick2812"
 
-#replace  php5-fpm config
 echo 'replace php5-fpm config'
 mv /etc/php5/fpm/php-fpm.conf /var/www/codiad/php-fpm.conf.bk
 mv $WORKING_FOLDER/php-fpm.conf /etc/php5/fpm/php-fpm.conf
@@ -36,7 +34,6 @@ mv $WORKING_FOLDER/php-fpm.conf /etc/php5/fpm/php-fpm.conf
 mv /etc/php5/fpm/pool.d/www.conf /var/www/codiad/www.conf.bk
 mv $WORKING_FOLDER/www.conf /etc/php5/fpm/pool.d/www.conf
 
-#edit nginx sites-available, ln sites-enabled
 echo 'edit nginx sites-available, ln sites-enabled'
 rm -rf /etc/nginx/sites-available/default
 rm -rf /etc/nginx/sites-enabled/default

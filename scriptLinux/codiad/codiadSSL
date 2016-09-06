@@ -18,6 +18,9 @@ server {
 	ssl_certificate /etc/nginx/ssl/codiad.crt;
 	ssl_certificate_key /etc/nginx/ssl/codiad.key;
 
+	access_log  /var/log/nginx/codiadAccess.log;
+    error_log   /var/log/nginx/codiadError.log;
+
 	root /var/www/codiad;
 	index index.php index.html;
 
