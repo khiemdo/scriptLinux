@@ -1,0 +1,47 @@
+upstream php-handler {
+	server 127.0.0.1:9000;
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+	server_name codiad.fnick2812.com;
+	return 301 https://$host$request_uri;
+}
+
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+
+	server_name codiad.fnick2812.com;
+
+	ssl_certificate /etc/nginx/ssl/codiad.crt;
+	ssl_certificate_key /etc/nginx/ssl/codiad.key;
+
+	access_log  /var/log/nginx/codiadAccess.log;
+    error_log   /var/log/nginx/codiadError.log;
+
+	root /var/www/codiad;
+	index index.php index.html;
+
+	location / {
+			try_files $uri $uri/ /index.html;
+	}
+
+	error_page 404 /404.html;
+	error_page 500 502 503 504 /50x.html;
+
+	location = /50x.html {
+			root /usr/share/nginx/html;
+	}
+	location ~ \.php$ {
+			fastcgi_split_path_info ^(.+\.php)(/.+)$;
+			fastcgi_pass php-handler;
+			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+			fastcgi_param modHeadersAvailable true;
+			fastcgi_intercept_errors on;
+			fastcgi_param HTTPS on;
+			fastcgi_index index.php;
+			include fastcgi_params;
+	}
+}

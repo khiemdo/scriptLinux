@@ -23,7 +23,7 @@ usermod -G git www-data
 usermod -G www-data git
 
 echo 'Generate codiad openssl key'
-mkdir /etc/nginx/ssl
+mkdir -p /etc/nginx/ssl
 cd /etc/nginx/ssl
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout codiad.key -out codiad.crt -subj "/C=SG/ST=Singapore/L=Singapore/O=fnick2812/OU=fnick2812/CN=fnick2812"
 

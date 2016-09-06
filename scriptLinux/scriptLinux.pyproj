@@ -41,10 +41,10 @@
     <Compile Include="codiad\codiad">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="codiad\codiadSSL">
+    <Compile Include="codiad\codiadSSL2">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="gogsInstall\gogs">
+    <Compile Include="gogsInstall\gogsSSL2">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="lavernaInstall\lavernaInstall.py">
@@ -129,6 +129,8 @@
     <Content Include="cloudCoding\codeInstall.sh">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="codiad\codiadSSL" />
+    <Content Include="codiad\codiad2" />
     <Content Include="codiad\codiadInstall.sh">
       <SubType>Code</SubType>
     </Content>
@@ -147,6 +149,9 @@
     <Content Include="dockerRapbian\dockerInstall.sh">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="gogsInstall\app.ini">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="gogsInstall\gogsInstallByGitUser.sh">
       <SubType>Code</SubType>
     </Content>
@@ -162,6 +167,7 @@
     <Content Include="gogsInstall\gogsInstall.sh">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="gogsInstall\gogsSSL" />
     <Content Include="lavernaInstall\laverna">
       <SubType>Code</SubType>
     </Content>
