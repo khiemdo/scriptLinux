@@ -1,0 +1,43 @@
+upstream php-handler {
+        server 127.0.0.1:9000;
+}
+
+upstream gogs {
+        server 127.0.0.1:3000;
+}
+
+server {
+        listen 80;
+        listen [::]:80;
+        server_name fnick2812.com;
+        return 301 https://$host$request_uri;
+}
+
+server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+
+        server_name fnick2812.com fnick2812.com;
+
+        ssl_certificate /etc/nginx/ssl/codiad.crt;
+        ssl_certificate_key /etc/nginx/ssl/codiad.key;
+
+        access_log  /var/log/nginx/fnick2812Access.log;
+        error_log   /var/log/nginx/fnick2812Error.log;
+
+        root /var/www;
+
+        include /etc/nginx/sites-available/fnick2812.com/*;
+
+        location ~ \.php$ {
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                fastcgi_pass php-handler;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_index index.php;
+                fastcgi_param modHeadersAvailable true;
+                fastcgi_intercept_errors on;
+                fastcgi_param HTTPS on;
+                include fastcgi_params;
+        }
+
+}
