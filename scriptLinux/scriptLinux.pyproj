@@ -44,6 +44,15 @@
     <Compile Include="codiad\codiadSSL2">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="fnick2812Nginx\fnick2812">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="fnick2812Nginx\fnick2812.com\codia">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="fnick2812Nginx\fnick2812.com\gogs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="gogsInstall\gogsSSL2">
       <SubType>Code</SubType>
     </Compile>
@@ -78,6 +87,12 @@
     <Compile Include="phpmyadmin\TestPhpMyAdminInstall.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="testNginx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="testNginx2">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="usbInterface\usbInterface.py">
       <SubType>Code</SubType>
     </Compile>
@@ -88,12 +103,14 @@
   <ItemGroup>
     <Folder Include="accessPointSetup\" />
     <Folder Include="BashUtility\" />
+    <Folder Include="fnick2812Nginx\fnick2812.com\" />
     <Folder Include="lavernaInstall\" />
     <Folder Include="gogsInstall\" />
     <Folder Include="dockerRapbian\" />
     <Folder Include="cloudCoding\" />
     <Folder Include="mysql-server\" />
     <Folder Include="codiad\" />
+    <Folder Include="fnick2812Nginx\" />
     <Folder Include="owncloud\" />
     <Folder Include="phpmyadmin\" />
     <Folder Include="seafileInstallation\" />
